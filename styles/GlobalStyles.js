@@ -21,6 +21,11 @@ const useStyles = makeStyles(() => createStyles({
     a: {
       textDecoration: 'none'
     },
+    code: {
+      backgroundColor: '#eee',
+      // color: '#333',
+      padding: '0.1em 0.4em',
+    },
     '#__next': {
       height: '100%',
       width: '100%'

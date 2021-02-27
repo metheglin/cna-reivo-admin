@@ -40,8 +40,13 @@ export default function SessionProvider({children}) {
   return (
     <SessionContext.Provider
       value={{
-        testa: 123,
-        testb: 456,
+        get token() {return AccessToken},
+        get payload() {return AccessToken.data || {}},
+        setToken(token) {AccessToken.setToken(token)},
+        logout() {
+          AccessToken.destroy()
+          router.push('/un/signin')
+        },
       }}>
       {component}
     </SessionContext.Provider>

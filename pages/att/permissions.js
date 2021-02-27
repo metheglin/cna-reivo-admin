@@ -9,13 +9,13 @@ import {useRouter} from 'next/router'
 import {useQuery} from 'react-query'
 import {useFlash} from 'modules/rvadmin/core/FlashProvider'
 import Api from 'modules/rvadmin/utils/Api'
-import AccessToken from 'modules/rvadmin/utils/AccessToken'
+import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
 const Page = () => {
+  const session = useSession()
   const router = useRouter()
   const {handleApiError} = useFlash()
   const api = Api.json({token: Api.token, handleApiError})
-
   const {isLoading, error, data} = useQuery('permissions', ()=>api.fetch('/permissions').then(res=>res.data))
 
   const selectAccount = (permissionId) => {
@@ -23,29 +23,23 @@ const Page = () => {
       method: "POST",
       body: {permission_id: permissionId}
     }).then(response=>{
-      const token = response.data
-      AccessToken.setToken( token )
+      session.setToken(response.data)
       router.push('/')
     })
   }
 
   return (
     <CenterLayout>
-      <Box
-        display="flex"
-        flexDirection="column"
-        height="100%"
-        justifyContent="center"
-      >
-        <Container maxWidth="sm">
+      <Container maxWidth="sm">
 
-          <Box mb={3}>
-            <Typography color="textPrimary" variant="h2">Select Account</Typography>
-            <Typography color="textSecondary" gutterBottom variant="body2">
-              利用するアカウントを選択します
-            </Typography>
-          </Box>
+        <Box mb={3}>
+          <Typography color="textPrimary" variant="h2">Select Account</Typography>
+          <Typography color="textSecondary" gutterBottom variant="body2">
+            You&apos;re logging in by <code>{session.payload.email}</code>
+          </Typography>
+        </Box>
 
+        <Box mb={3}>
           <Grid container spacing={3}>
             {isLoading && <CircularProgress />}
             {data && data.map((permission, i)=>(
@@ -54,8 +48,15 @@ const Page = () => {
               </Grid>
             ))}
           </Grid>
-        </Container>
-      </Box>
+        </Box>
+
+        <Typography color="textSecondary" variant="body1">
+          Don&apos;t have an account?{' '}
+          Try {' '}<Link href="#" variant="h5" onClick={()=>session.logout()}>
+            Log out
+          </Link>{' '}and signin again.
+        </Typography>
+      </Container>
     </CenterLayout>
   )
 }

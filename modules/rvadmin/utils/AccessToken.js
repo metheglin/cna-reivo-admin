@@ -9,6 +9,10 @@ export default class AccessToken {
     localStorage.setItem("access", token)
   }
 
+  static destroy() {
+    localStorage.removeItem("access")
+  }
+
   static get data() {
     if (!this.token) return null
     return decode(this.token)

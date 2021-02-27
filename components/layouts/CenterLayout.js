@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 import PlainLayout from './PlainLayout'
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +17,14 @@ const CenterLayout = ({children}) => {
   return (
     <PlainLayout>
       <div className={classes.root}>
-        {children}
+        <Box
+          display="flex"
+          flexDirection="column"
+          height="100%"
+          justifyContent="center"
+        >
+          {children}
+        </Box>
       </div>
     </PlainLayout>
   );
