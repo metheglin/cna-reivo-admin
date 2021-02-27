@@ -1,7 +1,6 @@
 import Head from 'next/head'
 // import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-
 const styles = {}
 
 export default function Home() {
@@ -14,9 +13,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <Link href={'/about'}>
-            <a>About</a>
-          </Link>
+          Welcome to About
         </h1>
 
         
