@@ -188,7 +188,7 @@ const Info = ({title, url}) => {
         </Typography>
       </Grid>
       <Grid item>
-        <Chip size="medium" label={process.env.NODE_ENV} color={process.env.NODE_ENV==='production' ? 'secondary' : 'default'} />
+        <Chip size="small" label={process.env.NODE_ENV} color={process.env.NODE_ENV==='production' ? 'secondary' : 'default'} />
       </Grid>
       {url && <Grid item>
         {renderLink()}

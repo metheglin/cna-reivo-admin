@@ -23,6 +23,8 @@ const theme = createMuiTheme({
   mixins: {
     toolbar: {
       minHeight: 48,
+      paddingLeft: 16,
+      paddingRight: 16,
     }
   },
   shadows,
