@@ -20,6 +20,11 @@ const theme = createMuiTheme({
       secondary: colors.blueGrey[600]
     }
   },
+  mixins: {
+    toolbar: {
+      minHeight: 48,
+    }
+  },
   shadows,
   typography
 });

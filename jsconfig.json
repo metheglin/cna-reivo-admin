@@ -6,6 +6,7 @@
       "@modules/*": ["modules/*"],
       "@pages/*": ["pages/*"],
       "@themes/*": ["themes/*"],
+      "@constants/*": ["constants/*"],
     }
   }
 }
