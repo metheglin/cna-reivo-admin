@@ -1,11 +1,19 @@
 import React from 'react'
-import LinkNext from 'next/link'
-import {Breadcrumbs, Typography, Link} from '@material-ui/core'
+// import LinkNext from 'next/link'
+import Link from 'components/Link'
+import {Breadcrumbs, Typography, makeStyles} from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+  item: {
+    fontSize: 12,
+  },
+}))
 
 const renderListItem = ({title, url}, index) => {
-  if (!url) return (<Typography key={index} color="textPrimary">{title}</Typography>)
+  const classes = useStyles()
+  if (!url) return (<Typography key={index} color="textPrimary" className={classes.item}>{title}</Typography>)
   return (
-    <LinkNext key={index} href={url}><Link color="inherit" href={url}>{title}</Link></LinkNext>
+    <Link key={index} color="inherit" href={url} className={classes.item}>{title}</Link>
   )
 }
 

@@ -1,15 +1,15 @@
-import {ThemeProvider} from '@material-ui/core'
 import FlashProvider from 'modules/rvadmin/core/FlashProvider'
 import SessionProvider from 'modules/rvadmin/core/SessionProvider'
-import theme from '@themes/default'
+import {ThemeProvider} from '@themes/default'
 import GlobalStyles from '../styles/GlobalStyles'
 import {QueryClient, QueryClientProvider} from 'react-query'
 const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <GlobalStyles />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       <QueryClientProvider client={queryClient}>
         <FlashProvider>
           <SessionProvider>

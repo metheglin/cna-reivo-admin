@@ -1,11 +1,14 @@
 import React, {useState, useEffect, useCallback, useContext, createContext} from 'react'
 import {useRouter} from 'next/router'
 import AccessToken from '@modules/rvadmin/utils/AccessToken'
+import {useFlash} from 'modules/rvadmin/core/FlashProvider'
+import Api from 'modules/rvadmin/utils/Api'
 
 const SessionContext = createContext({})
 
 export default function SessionProvider({children}) {
   const router = useRouter()
+  const {handleApiError, enqueueSnackbar, enqueuePermanentError} = useFlash()
   const [component, setComponent] = useState()
 
   const renderContainer = useCallback((accessToken) => {
@@ -47,6 +50,13 @@ export default function SessionProvider({children}) {
           AccessToken.destroy()
           router.push('/un/signin')
         },
+        get api() {
+          return Api.json({token: AccessToken.token, handleApiError})
+        },
+        get apiRaw() {
+          return Api.raw({token: AccessToken.token, handleApiError})
+        },
+        enqueueSnackbar, enqueuePermanentError,
       }}>
       {component}
     </SessionContext.Provider>

@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => createStyles({
       textDecoration: 'none'
     },
     code: {
-      backgroundColor: '#eee',
+      // backgroundColor: '#eee',
       // color: '#333',
       padding: '0.1em 0.4em',
     },

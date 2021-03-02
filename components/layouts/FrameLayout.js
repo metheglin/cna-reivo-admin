@@ -183,8 +183,8 @@ const Info = ({title, url}) => {
   return (
     <Grid container alignItems="center" spacing={1}>
       <Grid item>
-        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-          <Link color="inherit" href='/'>{title}</Link>
+        <Typography variant="h6" color="inherit" noWrap className={classes.title}>
+          <Link color="inherit" href='/'>{title || ""}</Link>
         </Typography>
       </Grid>
       <Grid item>

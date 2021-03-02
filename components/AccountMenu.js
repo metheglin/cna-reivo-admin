@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import {useRouter} from 'next/router'
+import {useTheme} from 'themes/default'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
-// import Link from 'components/Link'
-import LinkNext from 'next/link'
 import {
-  IconButton, Menu, MenuItem
+  IconButton, Menu, MenuItem, FormControlLabel, Switch,
 } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -15,6 +14,7 @@ export default function AccountMenu() {
   const router = useRouter()
   const session = useSession()
   const {email} = session.payload
+  const {paletteType, setPaletteType} = useTheme()
 
   return (
     <React.Fragment>
@@ -27,7 +27,19 @@ export default function AccountMenu() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={()=>setAnchorEl(null)}>
-        <MenuItem onClick={()=>{}}>{email}</MenuItem>
+        <MenuItem>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={paletteType === 'dark'}
+                onChange={()=>setPaletteType(paletteType === 'dark' ? 'light' : 'dark')}
+                color="primary"
+              />
+            }
+            label="Dark mode"
+          />
+        </MenuItem>
+        <MenuItem>{email}</MenuItem>
         <MenuItem onClick={()=>router.push('/att/permissions')}>
           <SwapHorizIcon style={{paddingRight: 6}} /> アカウントを変更
         </MenuItem>

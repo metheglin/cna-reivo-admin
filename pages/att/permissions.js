@@ -7,19 +7,15 @@ import StarsIcon from '@material-ui/icons/Stars';
 import {CenterLayout} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useQuery} from 'react-query'
-import {useFlash} from 'modules/rvadmin/core/FlashProvider'
-import Api from 'modules/rvadmin/utils/Api'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
 const Page = () => {
   const session = useSession()
   const router = useRouter()
-  const {handleApiError} = useFlash()
-  const api = Api.json({token: Api.token, handleApiError})
-  const {isLoading, error, data} = useQuery('permissions', ()=>api.fetch('/permissions').then(res=>res.data))
+  const {isLoading, error, data} = useQuery('permissions', ()=>session.api.fetch('/permissions').then(res=>res.data))
 
   const selectAccount = (permissionId) => {
-    api.fetch('/authorize', {
+    session.api.fetch('/authorize', {
       method: "POST",
       body: {permission_id: permissionId}
     }).then(response=>{
