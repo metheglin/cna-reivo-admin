@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     transition: '0.15s',
     width: '100%',
-    padding: '32px 0',
+    padding: '16px 0',
     boxSizing: 'border-box',
     textAlign: 'center',
     border: props => (
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         `3px solid ${theme.palette.secondary.main}` :
         `3px dashed ${theme.palette.primary.main}`
     ),
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: 'bold',
     color: props => (
       props.isDragActive ?
@@ -30,8 +30,8 @@ export default ({onDrop, message}) => {
   const classes = useStyles({isDragActive})
   const renderMessage = () => {
     if (message) return message
-    if (isDragActive) return (<p>ドラッグドロップで画像を追加できます</p>)
-      return (<p>ドラッグドロップで画像を追加できます</p>)
+    if (isDragActive) return (<p>Drag and drop files here</p>)
+    return (<p>Drag and drop files here</p>)
   }
   
   return (

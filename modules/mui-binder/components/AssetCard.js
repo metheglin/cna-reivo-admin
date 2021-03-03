@@ -4,10 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import CardActions from '@material-ui/core/CardActions'
-// import Button from '@material-ui/core/Button'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
-// import Api from '../../utils/Api'
-// import useFlash from '../../modules/useFlash'
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -39,14 +36,25 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     flexGrow: 1,
   },
+  cardActions: {
+    padding: theme.spacing(0.5),
+    '& > p': {
+      fontSize: 9,
+    }
+  },
 
   defaultFile: {
-    display: 'flex',
-    flex: 1,
-    flexWrap: 'wrap',
-    backgroundColor: theme.palette.grey[10],
-    textAlign: 'center',
+    paddingTop: '100%',
+    position: 'relative',
   },
+  defaultFileIcon: {
+    display: 'block',
+    position: 'absolute',
+    top: 8,
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  }
 }));
 
 export default ({item, onClick/*, onDeleteImage*/}) => {
@@ -64,7 +72,7 @@ export default ({item, onClick/*, onDeleteImage*/}) => {
           image={url} />
       )
     }
-    return (<DefaultFile className={classes.cardMedia} item={item} />)
+    return (<DefaultFile item={item} />)
   }
   // const onDelete = (item) => {
   //   var confirmation = window.confirm('Are you want to delete the image?');
@@ -82,8 +90,8 @@ export default ({item, onClick/*, onDeleteImage*/}) => {
     <div className={classes.cardBox}>
       <Card className={classes.card} onClick={()=>onClick(item)}>
         {renderVisual()}
-        <CardActions>
-          <Typography variant="body2">{item.content_type}</Typography>
+        <CardActions className={classes.cardActions}>
+          <Typography variant="body2">{item.rough_content_type || item.content_type}</Typography>
         </CardActions>
       </Card>
       {/*<span onClick={()=>onDelete(item)}>X</span>*/}
@@ -95,8 +103,7 @@ const DefaultFile = ({item}) => {
   const classes = useStyles()
   return (
     <div className={classes.defaultFile}>
-      <AttachFileIcon />
-      <span>{item.title}</span>
+      <AttachFileIcon className={classes.defaultFileIcon} />
     </div>
   )
 }

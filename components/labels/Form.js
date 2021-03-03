@@ -31,7 +31,8 @@ export default function Form({save, prefix, subject}) {
     defaultValue: Array.of(subject.image).filter(x=>x),
     max: 1,
     baseQuery: {
-      channel: 'label',
+      limit: 18,
+      // channel: 'label',
       // content_type: 'image',
     },
     api: session.api,

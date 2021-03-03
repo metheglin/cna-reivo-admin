@@ -14,9 +14,9 @@ import useImages from 'modules/rvadmin/core/useImages'
 
 const useStyles = makeStyles(theme => ({
   gridList: {
-    maxHeight: 450,
-    overflowY: 'scroll',
-    marginBottom: theme.spacing(2),
+    // maxHeight: 450,
+    // overflowY: 'scroll',
+    marginBottom: theme.spacing(1),
   },
   selector: {
     backgroundColor: theme.palette.primary.light,
@@ -68,7 +68,7 @@ const newSelectableAssets = ({defaultValue, max, baseQuery, api, apiUpload}) => 
       <Grid item xs={12}>
         <Grid container className={classes.gridList} spacing={1}>
           {assetsModule.assets.filter(a=>!values.includes(a)).map((item,i) => (
-            <Grid item key={i} xs={4} sm={3} md={2}>
+            <Grid item key={i} xs={3} sm={2} md={2}>
               <AssetCard item={item} 
                 onClick={(asset)=>pushValue(asset)} />
             </Grid>

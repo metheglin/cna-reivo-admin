@@ -23,14 +23,16 @@ export default function useGridForm({forms, subforms, handleSave}) {
   }
 
   const render = (
-    <Grid container spacing={4} alignItems="flex-start" justify="space-between">
-      <Grid item container sm={12} md={8} spacing={3}>
-        {renderRecursive(forms)}
+    <Grid container spacing={4}>
+      <Grid item container alignItems="flex-start" justify="space-between" spacing={3}>
+        <Grid item container sm={12} md={7} spacing={3}>
+          {renderRecursive(forms)}
+        </Grid>
+        {subforms && subforms.length>0 && <Grid item container sm={12} md={5} spacing={0}>
+          {renderRecursive(subforms)}
+        </Grid>}
       </Grid>
-      {subforms && subforms.length>0 && <Grid item container sm={12} md={4} spacing={3}>
-        {renderRecursive(subforms)}
-      </Grid>}
-      {handleSave && <Grid item xs={12}>
+      {handleSave && <Grid item xs={12} spacing={3}>
         <Button
           type="submit"
           fullWidth
