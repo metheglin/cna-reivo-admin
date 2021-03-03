@@ -5,7 +5,7 @@ export default function Component({prefix}) {
   return (
     <Box mb={3}>
       <DashBar title={<React.Fragment>Label <code>{prefix}</code></React.Fragment>} 
-        iconLinks={[{url: '/labels/new', icon: 'add_circle', title: 'New'}]} />
+        iconLinks={[{url: '/labels/new', icon: 'add_circle', title: 'New'}, {url: '/labels/22', icon: 'star'}, {url: '/labels/21', icon: 'circle'}]} />
     </Box>
   )
 }

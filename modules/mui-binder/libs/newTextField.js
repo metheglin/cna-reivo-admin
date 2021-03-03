@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField'
 
-export default ({defaultValue, onChange, ...restProps}) => {
+export default function newTextField({defaultValue, onChange, ...restProps}) {
   const [value, setValue] = useState(defaultValue || "")
   const reset = () => setValue(defaultValue || "")
+  useEffect(()=>setValue(defaultValue), [defaultValue])
   useEffect(()=>{
     onChange && onChange(value)
   }, [value, onChange])

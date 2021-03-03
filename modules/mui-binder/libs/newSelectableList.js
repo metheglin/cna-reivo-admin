@@ -1,6 +1,7 @@
 import {useState} from 'react'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
-export default ({defaultValue, max}) => {
+export default function newSelectableList({defaultValue, max}) {
   max = max || 1000
   const [values, setValues] = useState(defaultValue || [])
   const pushValue = val => {
@@ -10,6 +11,7 @@ export default ({defaultValue, max}) => {
   const clearValues = () => setValues([])
   const hasValues = () => values && values.length > 0
   const accessors = {values, pushValue, removeValues, clearValues, hasValues, setValues}
+  useDeepCompareEffect(()=>setValues(defaultValue), [defaultValue])
 
   return accessors
 }

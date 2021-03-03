@@ -1,14 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-
-import IconButton from '@material-ui/core/IconButton';
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import {
+  Table, TableBody, TableHead, TableRow, TableFooter, TablePagination, IconButton, 
+} from '@material-ui/core'
+import {default as MuiTableCell} from '@material-ui/core/TableCell'
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -47,9 +42,7 @@ export default (props) => {
   }
 
   const render = (
-    <ItemListTemplate tableProps={tableProps} headers={headers} rows={rows} 
-      rowComponent={rowComponent} 
-      update={update} updateRowById={updateRowById}>
+    <ItemListTemplate {...{tableProps,headers,rows,rowComponent,update,updateRowById}}>
       <TablePagination colSpan={headers ? headers.length : 10}
         rowsPerPageOptions={[defaultLimit, defaultLimit*2]}
         count={total}
@@ -74,6 +67,10 @@ export default (props) => {
     rows, total, limit, page, render, turnPage, loading
   }
 }
+
+const TableCell = withStyles({
+  head: {fontWeight: 600},
+})(MuiTableCell)
 
 export const ItemListTemplate = ({tableProps, headers, rows, rowComponent, children, 
   update, updateRowById}) => (

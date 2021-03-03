@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
 import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
@@ -9,15 +9,18 @@ import useGridForm from 'modules/rvadmin/core/useGridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
 export default function Form({save, prefix, subject}) {
-  const session = useSession()
   subject = subject || {}
+  const session = useSession()
+  const displayPrefix = prefix ?
+    "/" + prefix.split('/').filter(x=>x).concat([""]).join('/') :
+    ""
   const path = newTextField({
     defaultValue: subject.path || "", 
     label: "Path", required: true,
     fullWidth: true, disabled: !!subject.path,
-    InputProps: prefix ?
-      {startAdornment: <InputAdornment position="start">{`${prefix}/`}</InputAdornment>} :
-      null
+    InputProps: {
+      startAdornment: <InputAdornment position="start">{displayPrefix}</InputAdornment>
+    }
   })
   const name = newTextField({defaultValue: subject.name || "", label: "Name", required: true, fullWidth: true})
   const serial_code = newTextField({
@@ -35,7 +38,7 @@ export default function Form({save, prefix, subject}) {
     apiUpload: session.apiRaw,
   })
   const body = {
-    path: prefix ? `${prefix}/${path.value}` : path.value,
+    path: displayPrefix ? `${displayPrefix}/${path.value}` : path.value,
     name: name.value,
     serial_code: serial_code.value,
     image_id: image.hasValues() ? image.values[0].id : null,

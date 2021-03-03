@@ -14,21 +14,20 @@ import {Form, DashBar, getBreadcrumb} from 'components/labels'
 
 const Page = () => {
   const prefix = '/'
+  const router = useRouter()
+  const {id} = router.query
   return (
     <FrameLayout breadcrumb={getBreadcrumb(prefix)}>
       <DashBar prefix={prefix} />
-      <Box py={2}><PageContainer /></Box>
+      <Box py={2}><PageContainer id={id} /></Box>
     </FrameLayout>
   )
 }
 
-const PageContainer = () => {
-  const router = useRouter()
-  const session = useSession()
-  const {id} = router.query
-
+const PageContainer = ({id}) => {
   if (!id) return (<CircularProgress />)
-  const {isLoading, error, data} = useQuery('subject', ()=>session.api.fetch(`/labels/${id}`).then(res=>res.data))
+  const session = useSession()
+  const {isLoading, error, data} = useQuery(`/labels/${id}`, ()=>session.api.fetch(`/labels/${id}`).then(res=>res.data))
   if (isLoading) return (<CircularProgress />)
   return (<PageInner subject={data} />)
 }
