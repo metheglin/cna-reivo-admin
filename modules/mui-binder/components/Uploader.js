@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   dashedArea: {
+    cursor: 'pointer',
     borderRadius: 10,
     transition: '0.15s',
     width: '100%',

@@ -32,7 +32,7 @@ export default function Form({save, prefix, subject}) {
     max: 1,
     baseQuery: {
       limit: 18,
-      // channel: 'label',
+      channel: 'label',
       // content_type: 'image',
     },
     api: session.api,
