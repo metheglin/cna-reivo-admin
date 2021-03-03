@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default ({onDrop, message}) => {
+export default function Uploader({onDrop, message}) {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   const classes = useStyles({isDragActive})
   const renderMessage = () => {

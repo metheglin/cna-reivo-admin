@@ -32,7 +32,7 @@ export default function useGridForm({forms, subforms, handleSave}) {
           {renderRecursive(subforms)}
         </Grid>}
       </Grid>
-      {handleSave && <Grid item xs={12} spacing={3}>
+      {handleSave && <Grid item xs={12}>
         <Button
           type="submit"
           fullWidth

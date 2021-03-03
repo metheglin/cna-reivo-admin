@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({item, onClick/*, onDeleteImage*/}) => {
+export default function AssetCard({item, onClick/*, onDeleteImage*/}) {
   // const {handleApiError} = useFlash()
 
   const classes = useStyles()
