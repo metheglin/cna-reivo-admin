@@ -1,22 +1,14 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import {makeStyles, Grid, Typography, IconButton, InputLabel} from '@material-ui/core'
 import CancelIcon from '@material-ui/icons/Cancel';
-// import InputLabel from '@material-ui/core/InputLabel'
-
-import newSelectableList from './newSelectableList'
-import Uploader from '../components/Uploader'
-import AssetCard from '../components/AssetCard'
-
-import useImages from 'modules/rvadmin/core/useImages'
+import newSelectableList from '../newSelectableList'
+import AssetCard from '../../components/AssetCard'
 
 const useStyles = makeStyles(theme => ({
   gridList: {
     // maxHeight: 450,
     // overflowY: 'scroll',
-    marginBottom: theme.spacing(1),
+    // marginBottom: theme.spacing(1),
   },
   selector: {
     backgroundColor: theme.palette.primary.light,
@@ -55,40 +47,41 @@ export const Selector = ({values, removeValues}) => {
   )
 }
 
-const newSelectableAssets = ({defaultValue, max, baseQuery, api, apiUpload}) => {
-  const accessors = newSelectableList({max, defaultValue})
-  const assetsModule = useImages({baseQuery, api, apiUpload})
+export function List({assets, isSelected, onClick}) {
   const classes = useStyles()
-  const {values,pushValue} = accessors
-  const renderList = (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Uploader onDrop={assetsModule.onDrop} />
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container className={classes.gridList} spacing={1}>
-          {assetsModule.assets.filter(a=>!values.includes(a)).map((item,i) => (
-            <Grid item key={i} xs={3} sm={2} md={2}>
-              <AssetCard item={item} 
-                onClick={(asset)=>pushValue(asset)} />
-            </Grid>
-          ))}
+  return (
+    <Grid container className={classes.gridList} spacing={1}>
+      {assets.filter(a=>!isSelected(a)).map((item,i) => (
+        <Grid item key={i} xs={3} sm={2} md={2}>
+          <AssetCard item={item} 
+            onClick={onClick} />
         </Grid>
-      </Grid>
+      ))}
     </Grid>
+  )
+}
+
+const newSelectableAssets = ({defaultValue, max, assetsModule}) => {
+  const accessors = newSelectableList({max, defaultValue})
+  const {values, pushValue} = accessors
+
+  const renderList = (
+    <List assets={assetsModule.assets}
+      isSelected={(asset)=>values.includes(asset)}
+      onClick={(asset)=>pushValue(asset)} />
   )
   const renderSelector = Selector(accessors)
   return {
-    assetsModule,
     ...accessors,
     renderList,
     renderSelector,
     render: (
-      <React.Fragment>
-        {renderList}
-        {renderSelector}
-      </React.Fragment>
-    ),
+      <Grid container spacing={2}>
+        <Grid item xs={12}>{assetsModule.render}</Grid>
+        <Grid item xs={12}>{renderList}</Grid>
+        <Grid item xs={12}>{renderSelector}</Grid>
+      </Grid>
+    )
   }
 }
 export default newSelectableAssets

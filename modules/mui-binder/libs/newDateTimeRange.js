@@ -2,7 +2,7 @@ import React from 'react'
 import newDateTime from './newDateTime'
 import Grid from '@material-ui/core/Grid'
 
-export default ({startAtProps, endAtProps, onChange}) => {
+export default function newDateTimeRange({startAtProps, endAtProps, onChange}) {
   startAtProps = startAtProps || {}
   endAtProps = endAtProps || {}
   onChange = onChange || (()=>{})
@@ -17,7 +17,7 @@ export default ({startAtProps, endAtProps, onChange}) => {
     ...endAtProps
   })
   const render = (
-    <Grid container justify="space-between" spacing={2}>
+    <Grid container justify="flex-start" spacing={2}>
       <Grid item md={6}>{startAt.render}</Grid>
       <Grid item md={6}>{endAt.render}</Grid>
     </Grid>

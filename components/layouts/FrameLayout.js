@@ -50,6 +50,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: theme.palette.mode === 'light' ? null : theme.palette.background.level2,
+    color: theme.palette.mode === 'light' ? null : '#fff',
   },
   appBarShift: {
     marginLeft: drawerWidth,

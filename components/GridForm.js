@@ -11,7 +11,7 @@ const renderRecursive = (objects, key) => {
   return (<Grid key={key} item xs={12}>{objects}</Grid>)
 }
 
-export default function useGridForm({forms, subforms, handleSave}) {
+export default function GridForm({children, forms, subforms, handleSave}) {
   const [saving, setSaving] = useState(false)
 
   const onSave = () => {
@@ -22,7 +22,7 @@ export default function useGridForm({forms, subforms, handleSave}) {
     })
   }
 
-  const render = (
+  return (
     <Grid container spacing={4}>
       <Grid item container alignItems="flex-start" justify="space-between" spacing={3}>
         <Grid item container sm={12} md={7} spacing={3}>
@@ -32,6 +32,7 @@ export default function useGridForm({forms, subforms, handleSave}) {
           {renderRecursive(subforms)}
         </Grid>}
       </Grid>
+      {children && <Grid item xs={12}>{children}</Grid>}
       {handleSave && <Grid item xs={12}>
         <Button
           type="submit"
@@ -46,6 +47,4 @@ export default function useGridForm({forms, subforms, handleSave}) {
       </Grid>}
     </Grid>
   )
-
-  return {render, saving}
 }

@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react'
 import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
 import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
-
+import useImages from 'modules/rvadmin/core/useImages'
 import HelpTip from 'components/HelpTip'
-
-import useGridForm from 'modules/rvadmin/core/useGridForm'
+import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
 export default function Form({save, prefix, subject}) {
@@ -27,16 +26,18 @@ export default function Form({save, prefix, subject}) {
     defaultValue: subject.serial_code, label: "並び替え用コード", type: 'number',
     helperText: '数値が高い順に並んで表示されます',
   })
-  const image = newSelectableAssets({
-    defaultValue: Array.of(subject.image).filter(x=>x),
-    max: 1,
+  const assetsModule = useImages({
     baseQuery: {
       limit: 18,
       channel: 'label',
-      // content_type: 'image',
     },
     api: session.api,
     apiUpload: session.apiRaw,
+  })
+  const image = newSelectableAssets({
+    assetsModule,
+    defaultValue: Array.of(subject.image).filter(x=>x),
+    max: 4,
   })
   const body = {
     path: displayPrefix ? `${displayPrefix}/${path.value}` : path.value,
@@ -45,13 +46,10 @@ export default function Form({save, prefix, subject}) {
     image_id: image.hasValues() ? image.values[0].id : null,
   }
 
-  const gridForm = useGridForm({
-    forms: [
-      path, name, serial_code,
-    ],
-    subforms: [image],
-    handleSave: ()=>save(body),
-  })
-
-  return (<React.Fragment>{gridForm.render}</React.Fragment>)
+  return (
+    <GridForm 
+      forms={[path, name, serial_code,]}
+      subforms={[image]}
+      handleSave={()=>save(body)} />
+  )
 }

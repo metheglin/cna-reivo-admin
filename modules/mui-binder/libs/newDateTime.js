@@ -1,12 +1,5 @@
-import 'date-fns'
-import {
-  format, 
-  // formatDistance, 
-  // formatRelative, 
-  // subDays, 
-  isValid 
-} from 'date-fns'
-import React, {useState,useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
+import {format, isValid} from 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
@@ -26,25 +19,21 @@ const innerTheme = theme => createMuiTheme({
   }
 })
 
-export default ({ defaultValue, label, dateProps, timeProps, onChange }) => {
-  dateProps = dateProps || {}
-  timeProps = timeProps || {}
-  const init = {
-    date: defaultValue ? new Date(defaultValue) : new Date,
-    lastValidDate: null,
-  }
-  const [selected, setSelected] = useState(init)
-  useEffect(()=>{
-    onChange && onChange(selected)
-  }, [selected])
+export default function newDateTime({defaultValue, label}) {
+  const [date, setDate] = useState(defaultValue ? new Date(defaultValue) : new Date)
+  const [lastValidDate, setLastValidDate] = useState(null)
   const setSelectedWithValidity = date => {
+    setDate(date)
     if (isValid(date)) {
-      setSelected(_state=>({lastValidDate: date, date}))
-    } else {
-      setSelected(_state=>({..._state, date}))
+      setLastValidDate(date)
     }
   }
-  const reset = () => setSelected(init)
+  const reset = () => {
+    setDate(defaultValue ? new Date(defaultValue) : new Date)
+    setLastValidDate(null)
+  }
+
+  useEffect(()=>reset(), [defaultValue])
 
   const render = (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -54,40 +43,18 @@ export default ({ defaultValue, label, dateProps, timeProps, onChange }) => {
           variant="inline"
           ampm={false}
           label={label || " "}
-          value={selected.date}
+          value={date}
           onChange={date=>setSelectedWithValidity(date)}
           format="yyyy/MM/dd HH:mm"
         />
-        {/*<KeyboardDatePicker {...dateProps}
-          disableToolbar
-          variant="inline"
-          margin="normal"
-          format={dateProps.format || "yyyy/MM/dd"}
-          label={label || " "}
-          value={selected.date}
-          onChange={date=>setSelectedWithValidity(date)}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        <KeyboardTimePicker {...timeProps}
-          margin="normal"
-          label={" "}
-          value={selected.date}
-          onChange={date=>setSelectedWithValidity(date)}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />*/}
       </ThemeProvider>
     </MuiPickersUtilsProvider>
   )
 
   return { 
     render,
-    // Component, 
-    value: selected.date, 
-    format: (fm)=>(isValid(selected.date) ? format(selected.date, fm) : null),
+    value: date, 
+    format: (fm)=>(isValid(date) ? format(date, fm) : null),
     reset,
   }
 }
