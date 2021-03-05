@@ -5,7 +5,7 @@ import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
 import newDateTimeRange from 'modules/mui-binder/libs/newDateTimeRange'
 import newTinyMceEditor from 'modules/mui-binder/libs/newTinyMceEditor'
 import useImages from 'modules/rvadmin/core/useImages'
-import newSelectableLabels, {useLabels} from 'modules/mui-binder/libs/newSelectableLabels'
+import newSelectableLabels, {useLabels, useModalRender} from 'modules/mui-binder/libs/newSelectableLabels'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
@@ -52,6 +52,7 @@ export default function Form({save, subject}) {
     defaultValue: (subject.labels || []),
     max: 10,
   })
+  const labelRender = useModalRender(labels)
 
   const body = {
     start_at: publishRange.startAt.value,
@@ -69,7 +70,7 @@ export default function Form({save, subject}) {
         publishRange, slug, title, content,
         // image.renderSelector,
       ]}
-      subforms={[image, labels]}
+      subforms={[image, labelRender]}
       handleSave={()=>save(body)} />
   )
 }

@@ -96,6 +96,7 @@ export default function newSelectableLabels({defaultValue, label, max, labelsMod
 }
 
 export {default as useLabels} from './useLabels'
+export {default as useModalRender} from './useModalRender'
 
 export const normalizePath = (value) => {
   const components = Array.isArray(value) ? value : (value || "").split('/')
