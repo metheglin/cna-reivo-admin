@@ -5,6 +5,7 @@ import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
 import newDateTimeRange from 'modules/mui-binder/libs/newDateTimeRange'
 import newTinyMceEditor from 'modules/mui-binder/libs/newTinyMceEditor'
 import useImages from 'modules/rvadmin/core/useImages'
+import newSelectableLabels, {useLabels} from 'modules/mui-binder/libs/newSelectableLabels'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
@@ -37,6 +38,21 @@ export default function Form({save, subject}) {
     defaultValue: Array.of(subject.images).filter(x=>x),
     max: 5,
   })
+
+  const labelsModule = useLabels({
+    baseQuery: {
+      limit: 24,
+      // prefix: '/board/cat',
+      prefix: '/faq',
+    },
+    api: session.api,
+  })
+  const labels = newSelectableLabels({
+    labelsModule,
+    defaultValue: (subject.labels || []),
+    max: 10,
+  })
+
   const body = {
     start_at: publishRange.startAt.value,
     end_at: publishRange.endAt.value,
@@ -44,6 +60,7 @@ export default function Form({save, subject}) {
     title: title.value,
     content_text: content.value,
     image_id: image.hasValues() ? image.values[0].id : null,
+    label_ids: labels.values.map(x=>x.id),
   }
 
   return (
@@ -52,7 +69,7 @@ export default function Form({save, subject}) {
         publishRange, slug, title, content,
         // image.renderSelector,
       ]}
-      subforms={[image]}
+      subforms={[image, labels]}
       handleSave={()=>save(body)} />
   )
 }

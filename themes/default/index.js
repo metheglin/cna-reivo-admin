@@ -1,7 +1,8 @@
 import React, {useState, useMemo, useContext, createContext} from 'react'
 import { ThemeProvider as MuiThemeProvider, createMuiTheme, colors } from '@material-ui/core';
-import shadows from './shadows';
-import typography from './typography';
+import shadows from './shadows'
+import typography from './typography'
+import darkScrollbar from '../../styles/darkScrollbar'
 
 const ThemeContext = createContext({})
 
@@ -31,6 +32,7 @@ const lightPalette = {
     main: '#e82856',
   },
   type: 'light',
+  mode: 'light',
 }
 const darkPalette = {
   primary: {
@@ -43,6 +45,7 @@ const darkPalette = {
     main: '#f83161',
   },
   type: 'dark',
+  mode: 'dark',
 }
 
 export function ThemeProvider({children}) {
@@ -64,10 +67,16 @@ export function ThemeProvider({children}) {
           paddingLeft: 16,
           paddingRight: 16,
         }
+      }
+    },{
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: {
+            body: paletteType === 'dark' ? darkScrollbar() : null,
+          },
+        },
       },
-      shadows,
-      typography
-    })
+    }, shadows, typography)
     nextTheme.palette.background.level2 =
       paletteType === 'light' ? nextTheme.palette.grey[100] : '#424242'
     nextTheme.palette.background.level1 =
