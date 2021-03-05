@@ -11,10 +11,14 @@ import newRowsPager from 'modules/mui-binder/newRowsPager'
 // import ButtonResourceStatus from 'components/atoms/ButtonResourceStatus'
 import PublishStatus from 'components/PublishStatus'
 
-import {DashBar, getBreadcrumb, normalizePath} from 'components/labels'
+import {DashBar} from 'components/residentapp/boards'
 import {formatDistance} from 'date-fns'
 
-const Page = ({prefix}) => {
+const getBreadcrumb = () => ([
+  {title: "Boards",}
+])
+
+const Page = () => {
   const router = useRouter()
   const session = useSession()
 
@@ -51,12 +55,10 @@ const Page = ({prefix}) => {
 
   useEffect(()=>{
     pager.turnPage()
-  }, [prefix])
+  }, [])
 
   return (
-    <FrameLayout 
-      breadcrumb={getBreadcrumb(prefix)}>
-      <DashBar prefix={prefix} />
+    <FrameLayout dashBar={<DashBar breadcrumb={getBreadcrumb()} />}>
       <Paper><TableContainer>{pager.render}</TableContainer></Paper>
     </FrameLayout>
   )

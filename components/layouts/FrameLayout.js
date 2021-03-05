@@ -156,11 +156,6 @@ const FrameLayout = ({title, url, dashBar, containerProps, children}) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {/*breadcrumb && 
-          <Toolbar className={classes.breadcrumbToolbar}>
-            <Breadcrumb list={breadcrumb} />
-          </Toolbar>
-        */}
         {dashBar}
         <Container {...containerProps}>
           {children}

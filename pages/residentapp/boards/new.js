@@ -8,35 +8,23 @@ import {useQuery} from 'react-query'
 
 import {Form, DashBar} from 'components/residentapp/boards'
 
-const getBreadcrumb = (id) => ([
+const getBreadcrumb = () => ([
   {title: "Boards", url: '/residentapp/boards'},
-  {title: id}
+  {title: 'New'}
 ])
 
-const Page = () => {
-  const router = useRouter()
-  const {id} = router.query
-  return (
-    <FrameLayout dashBar={<DashBar breadcrumb={getBreadcrumb(id)} />}>
-      <Box py={2}><PageContainer id={id} /></Box>
-    </FrameLayout>
-  )
-}
-
-const PageContainer = ({id}) => {
-  if (!id) return (<CircularProgress />)
-  const session = useSession()
-  const {isLoading, error, data} = useQuery(`/residentapp/boards/${id}`, ()=>session.api.fetch(`/residentapp/boards/${id}`).then(res=>res.data))
-  if (isLoading) return (<CircularProgress />)
-  return (<PageInner subject={data} />)
-}
+const Page = () => (
+  <FrameLayout dashBar={<DashBar breadcrumb={getBreadcrumb()} />}>
+    <Box py={2}><PageInner /></Box>
+  </FrameLayout>
+)
 
 const PageInner = ({subject}) => {
   const router = useRouter()
   const session = useSession()
 
   const save = (body) => {
-    return session.api.fetch(`/residentapp/boards/${subject.id}`, {method: 'PUT', body}).then(res=>{
+    return session.api.fetch(`/residentapp/boards`, {method: 'POST', body}).then(res=>{
       session.enqueueSnackbar(res.message, {variant: "success"})
       router.push(`/residentapp/boards/${subject.id}`)
     })
