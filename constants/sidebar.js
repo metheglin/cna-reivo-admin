@@ -10,6 +10,14 @@ export const masterPages = [
 ]
 export const defaultPages = [
   {
+    pathname: '/labels',
+    subheader: 'Labels',
+    children: [
+      {pathname: '/labels', subheader: 'Labels'},
+      {pathname: '/labels/new', subheader: 'New'},
+    ]
+  },
+  {
     pathname: '/getting-started',
     children: [
       { pathname: '/getting-started/installation' },

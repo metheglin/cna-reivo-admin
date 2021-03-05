@@ -10,7 +10,13 @@ import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import newRowsPager from 'modules/mui-binder/newRowsPager'
 // import ButtonResourceStatus from 'components/atoms/ButtonResourceStatus'
 
-import {DashBar, getBreadcrumb, normalizePath} from 'components/labels'
+import {DashBar, normalizePath} from 'components/labels'
+
+const getBreadcrumb = (prefix) => {
+  return [
+    {title: `Labels (${prefix})`},
+  ]
+}
 
 const Page = () => {
   const router = useRouter()
@@ -35,7 +41,7 @@ const PageInner = ({prefix}) => {
     rowComponent: ({row, updateRowById}) => (
       <React.Fragment>
         <TableCell>
-          <Link href={`/labels/${row.id}`}>
+          <Link href={{pathname: `/labels/${row.id}`, query: {prefix}}}>
             {row.path}
           </Link>
         </TableCell>
@@ -61,8 +67,7 @@ const PageInner = ({prefix}) => {
 
   return (
     <FrameLayout 
-      breadcrumb={getBreadcrumb(prefix)}>
-      <DashBar prefix={prefix} />
+      dashBar={<DashBar prefix={prefix} breadcrumb={getBreadcrumb(prefix)} />}>
       <Paper><TableContainer>{pager.render}</TableContainer></Paper>
     </FrameLayout>
   )

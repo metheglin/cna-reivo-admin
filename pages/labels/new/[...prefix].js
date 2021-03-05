@@ -10,15 +10,19 @@ import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 
-import {Form, DashBar, getBreadcrumb, normalizePath} from 'components/labels'
+import {Form, DashBar, normalizePath} from 'components/labels'
+
+const getBreadcrumb = (prefix) => ([
+  {title: `Labels (${prefix})`, url: `/labels/prefix${prefix}`},
+  {title: 'New',},
+])
 
 const Page = () => {
   const router = useRouter()
   let {prefix} = router.query
   prefix = normalizePath(prefix)
   return (
-    <FrameLayout breadcrumb={getBreadcrumb(prefix)}>
-      <DashBar prefix={prefix} />
+    <FrameLayout dashBar={<DashBar prefix={prefix} breadcrumb={getBreadcrumb(prefix)} />}>
       <Box py={2}><PageInner prefix={prefix} /></Box>
     </FrameLayout>
   )

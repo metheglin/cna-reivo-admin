@@ -95,14 +95,14 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
-  breadcrumbPaper: {
-    margin: theme.spacing(1),
-  },
-  breadcrumbToolbar: {
-    minHeight: 'auto',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
+  // breadcrumbPaper: {
+  //   margin: theme.spacing(1),
+  // },
+  // breadcrumbToolbar: {
+  //   minHeight: 'auto',
+  //   paddingTop: theme.spacing(1),
+  //   paddingBottom: theme.spacing(1),
+  // },
   content: {
     flexGrow: 1,
     // height: '100vh',
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FrameLayout = ({title, url, breadcrumb, containerProps, children}) => {
+const FrameLayout = ({title, url, dashBar, containerProps, children}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   containerProps = containerProps || {maxWidth: "lg", className: classes.container}
@@ -156,11 +156,12 @@ const FrameLayout = ({title, url, breadcrumb, containerProps, children}) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {breadcrumb && 
+        {/*breadcrumb && 
           <Toolbar className={classes.breadcrumbToolbar}>
             <Breadcrumb list={breadcrumb} />
           </Toolbar>
-        }
+        */}
+        {dashBar}
         <Container {...containerProps}>
           {children}
         </Container>

@@ -10,15 +10,20 @@ import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import {useQuery} from 'react-query'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 
-import {Form, DashBar, getBreadcrumb} from 'components/labels'
+import {Form, DashBar} from 'components/labels'
+
+const getBreadcrumb = (id, prefix) => {
+  return [
+    {title: `Labels (${prefix})`, url: `/labels/prefix${prefix}`},
+    {title: id},
+  ]
+}
 
 const Page = () => {
-  const prefix = '/'
   const router = useRouter()
-  const {id} = router.query
+  const {id, prefix} = router.query
   return (
-    <FrameLayout breadcrumb={getBreadcrumb(prefix)}>
-      <DashBar prefix={prefix} />
+    <FrameLayout dashBar={<DashBar prefix={prefix} breadcrumb={getBreadcrumb(id, prefix)} />}>
       <Box py={2}><PageContainer id={id} /></Box>
     </FrameLayout>
   )
