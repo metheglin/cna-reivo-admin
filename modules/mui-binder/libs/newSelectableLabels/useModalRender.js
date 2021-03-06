@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme=>({
   // root: {
   //   maxWidth: '80vw',
   // },
-  filter: {
+  grow: {
     flexGrow: 1,
   },
   selector: {
@@ -51,7 +51,7 @@ export default function useModalRender(selectableLabels, props={}) {
             </Grid>
             <Grid item container sm={9}>
               <Grid item container alignItems="center" spacing={1}>
-                <Grid item className={classes.filter}>{renderFilter}</Grid>
+                <Grid item className={classes.grow}>{renderFilter}</Grid>
                 <Grid item>
                   <Link href={`/labels/new${prefix}`} passHref>
                     <Button size="small"
@@ -62,7 +62,7 @@ export default function useModalRender(selectableLabels, props={}) {
                   </Link>
                 </Grid>
               </Grid>
-              <Grid item>{renderList}</Grid>
+              <Grid item className={classes.grow}>{renderList}</Grid>
             </Grid>
           </Grid>
         </DialogContent>

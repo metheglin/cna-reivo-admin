@@ -24,8 +24,8 @@ export const Selector = ({values, removeValues}) => {
     <React.Fragment>
       {/*<InputLabel>Selector</InputLabel>*/}
       <Grid container className={classes.selector}>
-        {values.map(item => (
-          <Grid item xs={12} key={item.id}>
+        {values.map((item,i) => (
+          <Grid key={i} item xs={12}>
             <Grid container alignItems="center" justify="center" direction="row">
               <Grid item xs={3}>
                 <div className={classes.assetCard}>
