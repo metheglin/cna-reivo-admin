@@ -4,6 +4,8 @@ import newSearchBar from '../newSearchBar'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import {normalizePath} from './index.js'
 
+const stripLastSlash = path => path.endsWith('/') ? path.slice(0, -1) : path
+
 export default function useLabels({baseQuery, api}) {
   const [loading, setLoading] = useState(false)
   const [labels, setLabels] = useState([])
@@ -22,7 +24,7 @@ export default function useLabels({baseQuery, api}) {
   )
 
   const searchPrefix = normalizePath([prefix, searchBar.value].filter(x=>x).join(""))
-  const params = {...(baseQuery || {}), prefix: searchPrefix}
+  const params = {...(baseQuery || {}), prefix: stripLastSlash(searchPrefix)}
 
   useDeepCompareEffect(()=>{
     setLoading(true)

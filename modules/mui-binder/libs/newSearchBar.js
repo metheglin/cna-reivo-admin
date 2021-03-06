@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
     marginLeft: 0,
     // width: '100%',
     // [theme.breakpoints.up('sm')]: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({startAdornment, placeholder, ...props}) => {
+export default function newSearchBar({startAdornment, placeholder, ...props}) {
   const [value, setValue] = useState()
   const classes = useStyles()
 

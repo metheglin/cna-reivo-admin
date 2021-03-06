@@ -1,22 +1,39 @@
 import React, {useState} from 'react'
-import {makeStyles, Dialog, DialogContent, DialogActions, Button, Grid} from '@material-ui/core'
+import {
+  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid,
+  InputLabel, 
+} from '@material-ui/core'
+import Link from 'next/Link'
+import AddIcon from '@material-ui/icons/Add'
 
 const useStyles = makeStyles(theme=>({
   // root: {
   //   maxWidth: '80vw',
   // },
+  filter: {
+    flexGrow: 1,
+  },
+  selector: {
+    marginTop: 35,
+  }
 }))
 
-export default function useModalRender(selectableLabels) {
+export default function useModalRender(selectableLabels, props={}) {
   const classes = useStyles()
-  const {renderList, renderSelector} = selectableLabels
+  const {prefix, renderList, renderSelector, renderFilter} = selectableLabels
+  const {label} = props
   const [open, setOpen] = useState(false)
 
   return (
     <React.Fragment>
-      <Button autoFocus onClick={()=>setOpen(true)} color="primary">
-        Open
-      </Button>
+      <Grid container justify="space-between" alignItems="center">
+        <Grid item>
+          {label && <InputLabel className={classes.label}>Labels</InputLabel>}
+        </Grid>
+        <Grid item>
+          <Button onClick={()=>setOpen(true)} color="primary">Modify</Button>
+        </Grid>
+      </Grid>
       {renderSelector}
       <Dialog
         className={classes.root}
@@ -30,16 +47,28 @@ export default function useModalRender(selectableLabels) {
         <DialogContent dividers>
           <Grid container>
             <Grid item sm={3}>
-              {renderSelector}
+              <div className={classes.selector}>{renderSelector}</div>
             </Grid>
-            <Grid item sm={9}>
-              {renderList}
+            <Grid item container sm={9}>
+              <Grid item container alignItems="center" spacing={1}>
+                <Grid item className={classes.filter}>{renderFilter}</Grid>
+                <Grid item>
+                  <Link href={`/labels/new${prefix}`} passHref>
+                    <Button size="small"
+                      className={classes.button}
+                      startIcon={<AddIcon />}>
+                      Add More
+                    </Button>
+                  </Link>
+                </Grid>
+              </Grid>
+              <Grid item>{renderList}</Grid>
             </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={()=>setOpen(false)} color="primary">
-            Close
+            OK
           </Button>
         </DialogActions>
       </Dialog>

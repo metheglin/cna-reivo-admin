@@ -71,12 +71,14 @@ export default function newSelectableLabels({defaultValue, label, max, labelsMod
   const onPush = row=>pushValue(row)
   const renderList = (
     <Collection labels={labels || []}
-      isSelected={(label)=>values.includes(label)}
+      isSelected={(label)=>values.map(x=>x.id).includes(label.id)}
       onPush={onPush} onRemove={onRemove} />
   )
   const renderSelector = (<Selector labels={values} onRemove={onRemove} />)
   return {
+    prefix,
     ...accessors,
+    renderFilter: labelsModule.render,
     renderList,
     renderSelector,
     render: (

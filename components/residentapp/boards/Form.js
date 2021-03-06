@@ -52,7 +52,7 @@ export default function Form({save, subject}) {
     defaultValue: (subject.labels || []),
     max: 10,
   })
-  const labelRender = useModalRender(labels)
+  const labelRender = useModalRender(labels, {label: 'Labels'})
 
   const body = {
     start_at: publishRange.startAt.value,
