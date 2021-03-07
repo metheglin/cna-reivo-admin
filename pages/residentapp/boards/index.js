@@ -3,7 +3,7 @@ import {
   Button, Chip, TableCell, TableContainer, Paper, 
 } from '@material-ui/core';
 import Link from 'components/Link'
-import {FrameLayout} from 'components/layouts'
+import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
@@ -11,7 +11,7 @@ import newRowsPager from 'modules/mui-binder/newRowsPager'
 // import ButtonResourceStatus from 'components/atoms/ButtonResourceStatus'
 import PublishStatus from 'components/PublishStatus'
 
-import {DashBar} from 'components/residentapp/boards'
+import {MainDashBar} from 'components/residentapp/boards'
 import {formatDistance} from 'date-fns'
 
 const getBreadcrumb = () => ([
@@ -58,8 +58,10 @@ const Page = () => {
   }, [])
 
   return (
-    <FrameLayout dashBar={<DashBar breadcrumb={getBreadcrumb()} />}>
-      <Paper><TableContainer>{pager.render}</TableContainer></Paper>
+    <FrameLayout dashBar={<MainDashBar breadcrumb={getBreadcrumb()} />}>
+      <FrameLayoutWrapper>
+        <Paper><TableContainer>{pager.render}</TableContainer></Paper>
+      </FrameLayoutWrapper>
     </FrameLayout>
   )
 }

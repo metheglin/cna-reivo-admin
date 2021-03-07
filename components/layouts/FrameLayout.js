@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx'
 import Link from 'components/Link'
 import {
-  makeStyles, CssBaseline, Drawer, AppBar, Toolbar, List, Container, Divider,
+  makeStyles, CssBaseline, Drawer, AppBar, Toolbar, List, Container, Box, Divider,
   IconButton, Grid, Typography, Chip, Paper,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -105,19 +105,12 @@ const useStyles = makeStyles((theme) => ({
   // },
   content: {
     flexGrow: 1,
-    // height: '100vh',
-    // overflow: 'auto',
-  },
-  containerDefault: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
   },
 }));
 
-const FrameLayout = ({title, url, dashBar, containerProps, children}) => {
+const FrameLayout = ({title, url, dashBar, children}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-  containerProps = containerProps || {maxWidth: "lg", className: classes.container}
   const session = useSession()
 
   return (
@@ -157,9 +150,7 @@ const FrameLayout = ({title, url, dashBar, containerProps, children}) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         {dashBar}
-        <Container {...containerProps}>
-          {children}
-        </Container>
+        {children}
         {/*<Copyright />*/}
       </main>
     </div>
@@ -192,5 +183,11 @@ const Info = ({title, url}) => {
         {renderLink()}
       </Grid>}
     </Grid>
+  )
+}
+
+export function Wrapper({children}) {
+  return (
+    <Container><Box py={4}>{children}</Box></Container>
   )
 }

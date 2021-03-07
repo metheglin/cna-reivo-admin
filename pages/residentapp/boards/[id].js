@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react'
-import {Box, CircularProgress} from '@material-ui/core';
+import {CircularProgress} from '@material-ui/core';
 import Link from 'components/Link'
-import {FrameLayout} from 'components/layouts'
+import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
-import {useQuery} from 'react-query'
+import {useApi} from 'modules/rvadmin/core/useApi'
 
-import {Form, DashBar} from 'components/residentapp/boards'
+import {Form, MainDashBar, SubDashBar} from 'components/residentapp/boards'
 
 const getBreadcrumb = (id) => ([
   {title: "Boards", url: '/residentapp/boards'},
@@ -17,8 +17,8 @@ const Page = () => {
   const router = useRouter()
   const {id} = router.query
   return (
-    <FrameLayout dashBar={<DashBar breadcrumb={getBreadcrumb(id)} />}>
-      <Box py={2}><PageContainer id={id} /></Box>
+    <FrameLayout dashBar={<MainDashBar breadcrumb={getBreadcrumb(id)} />}>
+      <PageContainer id={id} />
     </FrameLayout>
   )
 }
@@ -26,23 +26,29 @@ const Page = () => {
 const PageContainer = ({id}) => {
   if (!id) return (<CircularProgress />)
   const session = useSession()
-  const {isLoading, error, data} = useQuery(`/residentapp/boards/${id}`, ()=>session.api.fetch(`/residentapp/boards/${id}`).then(res=>res.data))
+  const {isLoading, error, data, setData} = useApi(`/residentapp/boards/${id}`, (api)=>api.fetch(`/residentapp/boards/${id}`).then(res=>res.data))
   if (isLoading) return (<CircularProgress />)
-  return (<PageInner subject={data} />)
+  return (<PageInner subject={data} setSubject={setData} />)
 }
 
-const PageInner = ({subject}) => {
+const PageInner = ({subject, setSubject}) => {
   const router = useRouter()
   const session = useSession()
 
   const save = (body) => {
     return session.api.fetch(`/residentapp/boards/${subject.id}`, {method: 'PUT', body}).then(res=>{
       session.enqueueSnackbar(res.message, {variant: "success"})
-      router.push(`/residentapp/boards/${subject.id}`)
+      // router.push(`/residentapp/boards/${subject.id}`)
+      setSubject(res.data)
     })
   }
 
-  return (<Form {...{save, subject}} />)
+  return (
+    <React.Fragment>
+      <SubDashBar {...{subject, setSubject}} />
+      <FrameLayoutWrapper><Form {...{save, subject}} /></FrameLayoutWrapper>
+    </React.Fragment>
+  )
 }
 
 export default Page

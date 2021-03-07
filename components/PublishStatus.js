@@ -9,6 +9,17 @@ const useStyles = makeStyles({
   }
 })
 
+const statusMap = {
+  published: {
+    color: "primary",
+    label: "published",
+  },
+  unpublished: {
+    color: "secondary",
+    label: "not published",
+  }
+}
+
 export default function PublishStatus(props) {
   const classes = useStyles()
   const dt1= new Date(props.start_at)
@@ -24,7 +35,7 @@ export default function PublishStatus(props) {
     if (props.status === "opened") {
       if (privateDay > 0) {
         if (publicDay > 0) {
-          status = ["非公開", "default"]
+          status = "unpublished"
           if (publicDay <= publicLimit) {
             info = [
               `${formatDistance(dt1, new Date(), { addSuffix: true, locale: ja })}に公開`, 
@@ -32,7 +43,7 @@ export default function PublishStatus(props) {
             ]
           }
         } else {
-          status = ["公開中", "primary"]
+          status = "published"
           if (privateDay <= privateLimit) {
             info = [
               `${formatDistance(dt2, new Date(), { addSuffix: true, locale: ja })}に終了`,
@@ -41,25 +52,28 @@ export default function PublishStatus(props) {
           }
         }
       } else {
-        status = ["非公開", "default"]
+        status = "unpublished"
         info = ["公開予定なし", "inherit"]
       }
     } else {
-      status = ["非公開", "default"]
+      status = "unpublished"
       info = ["公開予定なし", "inherit"]
     }
   } else {
     if (props.status === "opened") {
-      status = ["公開中", "primary"]
+      status = "published"
     } else {
-      status = ["非公開", "default"]
+      status = "unpublished"
     }
   }
 
+  const {color: statusColor, label: statusLabel} = statusMap[status] || {}
+  const [infoLabel, infoColor] = info || []
+
   return (
     <React.Fragment>
-      {status && <Chip size="small" label={status[0]} color={status[1]} />}{' '}
-      {info && <Typography className={classes.caption} variant="caption" color={info[1]}>{info[0]}</Typography>}
+      {statusLabel && <Chip size="small" variant="outlined" label={statusLabel} color={statusColor} />}{' '}
+      {infoLabel && <Typography className={classes.caption} variant="caption" color={infoColor}>{infoLabel}</Typography>}
     </React.Fragment>
   )
 }

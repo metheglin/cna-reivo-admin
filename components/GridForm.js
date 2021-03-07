@@ -24,8 +24,8 @@ export default function GridForm({children, forms, subforms, handleSave}) {
 
   return (
     <Grid container spacing={4}>
-      <Grid item container alignItems="flex-start" justify="space-between" spacing={3}>
-        <Grid item container sm={12} md={7} spacing={3}>
+      <Grid item container alignItems="flex-start" justify="space-between" spacing={2}>
+        <Grid item container sm={12} md={7} spacing={2}>
           {renderRecursive(forms)}
         </Grid>
         {subforms && subforms.length>0 && <Grid item container sm={12} md={5} spacing={0}>

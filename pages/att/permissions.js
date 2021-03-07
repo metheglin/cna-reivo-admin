@@ -29,7 +29,7 @@ const Page = () => {
       <Container maxWidth="sm">
 
         <Box mb={3}>
-          <Typography color="textPrimary" variant="h2">Select Account</Typography>
+          <Typography color="textPrimary" variant="h4">Select Account</Typography>
           <Typography color="textSecondary" gutterBottom variant="body2">
             You&apos;re logging in by <code>{session.payload.email}</code>
           </Typography>
@@ -48,7 +48,7 @@ const Page = () => {
 
         <Typography color="textSecondary" variant="body1">
           Don&apos;t have an account?{' '}
-          Try {' '}<Link href="#" variant="h5" onClick={()=>session.logout()}>
+          Try {' '}<Link href="#" onClick={()=>session.logout()}>
             Log out
           </Link>{' '}and signin again.
         </Typography>

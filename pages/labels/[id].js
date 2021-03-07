@@ -1,16 +1,16 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react'
 import {
-  Box,Typography,makeStyles,CircularProgress,
+  Typography,makeStyles,CircularProgress,
   Paper, Toolbar, Tooltip, IconButton,
 } from '@material-ui/core';
 import Link from 'components/Link'
-import {FrameLayout} from 'components/layouts'
+import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import {useQuery} from 'react-query'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 
-import {Form, DashBar} from 'components/labels'
+import {Form, MainDashBar} from 'components/labels'
 
 const getBreadcrumb = (id, prefix) => {
   return [
@@ -23,8 +23,8 @@ const Page = () => {
   const router = useRouter()
   const {id, prefix} = router.query
   return (
-    <FrameLayout dashBar={<DashBar prefix={prefix} breadcrumb={getBreadcrumb(id, prefix)} />}>
-      <Box py={2}><PageContainer id={id} /></Box>
+    <FrameLayout dashBar={<MainDashBar prefix={prefix} breadcrumb={getBreadcrumb(id, prefix)} />}>
+      <PageContainer id={id} />
     </FrameLayout>
   )
 }
@@ -48,7 +48,7 @@ const PageInner = ({subject}) => {
     })
   }
 
-  return (<Form {...{save, subject}} />)
+  return (<FrameLayoutWrapper><Form {...{save, subject}} /></FrameLayoutWrapper>)
 }
 
 export default Page

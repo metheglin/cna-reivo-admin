@@ -1,5 +1,5 @@
 export { default as Form } from './Form'
-export { default as DashBar } from './DashBar'
+export { default as MainDashBar } from './MainDashBar'
 
 export const normalizePath = (value) => {
   const components = Array.isArray(value) ? value : (value || "").split('/')

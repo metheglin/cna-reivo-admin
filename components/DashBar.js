@@ -28,22 +28,31 @@ const useStyles = makeStyles(theme =>({
   },
 }))
 
-export default function DashBar({children, title, breadcrumb, iconLinks}) {
+export default function DashBar({children, main}) {
   const classes = useStyles()
   return (
     <div className={classes.root}>
       <Toolbar className={classes.toolbar}>
-        <div>
-          {title && <Typography variant="h4">{title}</Typography>}
-          {breadcrumb && <Breadcrumb list={breadcrumb} />}
-        </div>
-        <div>
-          {iconLinks.map((x,i)=><React.Fragment key={i}>{renderIconLink(x)}</React.Fragment>)}
-          {children}
-        </div>
+        <div>{main}</div>
+        <div>{children}</div>
       </Toolbar>
       <Divider />
     </div>
   )
+}
 
+export function MainDashBar({children, title, breadcrumb, iconLinks}) {
+  const main = (
+    <React.Fragment>
+      {title && <Typography variant="h4">{title}</Typography>}
+      {breadcrumb && <Breadcrumb list={breadcrumb} />}
+    </React.Fragment>
+  )
+  const sub = (
+    <React.Fragment>
+      {iconLinks.map((x,i)=><React.Fragment key={i}>{renderIconLink(x)}</React.Fragment>)}
+      {children}
+    </React.Fragment>
+  )
+  return (<DashBar main={main}>{sub}</DashBar>)
 }

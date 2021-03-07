@@ -3,7 +3,7 @@ import {
   makeStyles, Dialog, DialogContent, DialogActions, Button, Grid,
   InputLabel, 
 } from '@material-ui/core'
-import Link from 'next/Link'
+import Link from 'next/link'
 import AddIcon from '@material-ui/icons/Add'
 
 const useStyles = makeStyles(theme=>({
@@ -28,10 +28,10 @@ export default function useModalRender(selectableLabels, props={}) {
     <React.Fragment>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          {label && <InputLabel className={classes.label}>Labels</InputLabel>}
+          {label && <InputLabel shrink>Labels</InputLabel>}
         </Grid>
         <Grid item>
-          <Button onClick={()=>setOpen(true)} color="primary">Modify</Button>
+          <Button size="small" onClick={()=>setOpen(true)} color="primary">Modify</Button>
         </Grid>
       </Grid>
       {renderSelector}

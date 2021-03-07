@@ -31,7 +31,7 @@ const Page = () => {
     <CenterLayout>
       <Container maxWidth="sm">
         <Box mb={3}>
-          <Typography color="textPrimary" variant="h2">Sign in</Typography>
+          <Typography color="textPrimary" variant="h4">Sign in</Typography>
           {/*<Typography color="textSecondary" gutterBottom variant="body2">
             You&apos;re logging in by <code>{session.payload.email}</code>
           </Typography>*/}
