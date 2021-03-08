@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import {
   makeStyles, Grid, Typography, InputAdornment, Chip, IconButton, InputLabel, CircularProgress, TableCell,
-  List, ListItem, ListItemAvatar, ListItemText, Avatar
+  List, ListItem, ListItemText, ListItemSecondaryAction
 } from '@material-ui/core'
 import Link from '@material-ui/core/Link'
 import CancelIcon from '@material-ui/icons/Cancel'
@@ -14,19 +14,6 @@ const useStyles = makeStyles(theme => ({
   label: {
     marginBottom: theme.spacing(1),
   },
-  // gridList: {
-  //   // maxHeight: 450,
-  //   marginBottom: theme.spacing(2),
-  // },
-  // selector: {
-  //   backgroundColor: theme.palette.primary.light,
-  // },
-  // // assetCard: {
-  // //   opacity: 0.7,
-  // // },
-  // searchItem: {
-  //   cursor: 'pointer',
-  // },
   newLabelButton: {
     verticalAlign: 'middle',
   },
@@ -40,11 +27,11 @@ const Row = ({row, selected, onPush, onRemove}) => {
   const icon = selected ? <CancelIcon color="secondary" /> : <AddCircleIcon color="primary" />
   const onClick = () => selected ? onRemove(row) : onPush(row)
   return (
-    <ListItem button onClick={onClick} className={selected ? classes.selected : null}>
-      <ListItemAvatar>
-        <Avatar>{icon}</Avatar>
-      </ListItemAvatar>
+    <ListItem  className={selected ? classes.selected : null}>
       <ListItemText primary={row.name} secondary={row.path} />
+      <ListItemSecondaryAction>
+        <IconButton edge="end" onClick={onClick}>{icon}</IconButton>
+      </ListItemSecondaryAction>
     </ListItem>
   )
 }

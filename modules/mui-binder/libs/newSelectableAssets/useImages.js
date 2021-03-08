@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
-import {useFlash} from './FlashProvider'
+import {useFlash} from 'modules/rvadmin/core/FlashProvider'
 import { makeStyles } from '@material-ui/core/styles'
 
 const imageToCanvas = (img, width) => {

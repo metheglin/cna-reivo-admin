@@ -12,15 +12,16 @@ const useStyles = makeStyles(theme=>({
   // },
   grow: {
     flexGrow: 1,
+    marginBottom: theme.spacing(2),
   },
   selector: {
-    marginTop: 35,
+    marginTop: 68,
   }
 }))
 
-export default function useModalRender(selectableLabels, props={}) {
+export default function useModalRender(selectableAssets, props={}) {
   const classes = useStyles()
-  const {prefix, renderList, renderSelector, renderFilter} = selectableLabels
+  const {renderList, renderSelector, renderUploader} = selectableAssets
   const {label} = props
   const [open, setOpen] = useState(false)
 
@@ -51,16 +52,7 @@ export default function useModalRender(selectableLabels, props={}) {
             </Grid>
             <Grid item container sm={9}>
               <Grid item container alignItems="center" spacing={1}>
-                <Grid item className={classes.grow}>{renderFilter}</Grid>
-                <Grid item>
-                  <Link href={`/labels/new${prefix}`} passHref>
-                    <Button size="small"
-                      className={classes.button}
-                      startIcon={<AddIcon />}>
-                      Add More
-                    </Button>
-                  </Link>
-                </Grid>
+                <Grid item className={classes.grow}>{renderUploader}</Grid>
               </Grid>
               <Grid item className={classes.grow}>{renderList}</Grid>
             </Grid>

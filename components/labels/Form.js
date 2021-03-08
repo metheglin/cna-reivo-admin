@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
-import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
-import useImages from 'modules/rvadmin/core/useImages'
+import newSelectableAssets, {useImages, useModalRender} from 'modules/mui-binder/libs/newSelectableAssets'
+// import useImages from 'modules/rvadmin/core/useImages'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
@@ -37,8 +37,10 @@ export default function Form({save, prefix, subject}) {
   const image = newSelectableAssets({
     assetsModule,
     defaultValue: Array.of(subject.image).filter(x=>x),
-    max: 4,
+    max: 1,
   })
+  const imageRender = useModalRender(image, {label: 'Image'})
+
   const body = {
     path: displayPrefix ? `${displayPrefix}/${path.value}` : path.value,
     name: name.value,
@@ -49,7 +51,7 @@ export default function Form({save, prefix, subject}) {
   return (
     <GridForm 
       forms={[path, name, serial_code,]}
-      subforms={[image]}
+      subforms={[imageRender]}
       handleSave={()=>save(body)} />
   )
 }

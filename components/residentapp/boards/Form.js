@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
-import newSelectableAssets from 'modules/mui-binder/libs/newSelectableAssets'
+import newSelectableAssets, {useImages, useModalRender as useAssetsModalRender} from 'modules/mui-binder/libs/newSelectableAssets'
 import newDateTimeRange from 'modules/mui-binder/libs/newDateTimeRange'
 import newTinyMceEditor from 'modules/mui-binder/libs/newTinyMceEditor'
-import useImages from 'modules/rvadmin/core/useImages'
-import newSelectableLabels, {useLabels, useModalRender} from 'modules/mui-binder/libs/newSelectableLabels'
+import newSelectableLabels, {useLabels, useModalRender as useLabelsModalRender} from 'modules/mui-binder/libs/newSelectableLabels'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
@@ -38,6 +37,7 @@ export default function Form({save, subject}) {
     defaultValue: Array.of(subject.images).filter(x=>x),
     max: 5,
   })
+  const imageRender = useAssetsModalRender(image, {label: 'Images'})
 
   const labelsModule = useLabels({
     baseQuery: {
@@ -52,7 +52,7 @@ export default function Form({save, subject}) {
     defaultValue: (subject.labels || []),
     max: 10,
   })
-  const labelRender = useModalRender(labels, {label: 'Labels'})
+  const labelRender = useLabelsModalRender(labels, {label: 'Labels'})
 
   const body = {
     start_at: publishRange.startAt.value,
@@ -70,7 +70,7 @@ export default function Form({save, subject}) {
         publishRange, slug, title, content,
         // image.renderSelector,
       ]}
-      subforms={[image, labelRender]}
+      subforms={[imageRender, labelRender]}
       handleSave={()=>save(body)} />
   )
 }

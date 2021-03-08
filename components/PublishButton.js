@@ -20,7 +20,7 @@ export const ButtonOpen = props => (
       color="primary"
       size="small"
       startIcon={<CachedIcon />}>
-      opened
+      open
     </Button>
   </Tooltip>
 )
