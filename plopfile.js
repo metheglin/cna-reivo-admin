@@ -38,7 +38,6 @@ module.exports = plop => {
       const apiPrefix   = inputApiPrefix ? inputApiPrefix : `/${urlCase(name)}`
       const data  = {name, pathPrefix, apiPrefix}
       console.log(data)
-      // return
 
       const presetComponents = ['index', 'Form', 'MainDashBar', 'SubDashBar']
       const actionsPresetComponents = presetComponents.map(filename=>({
