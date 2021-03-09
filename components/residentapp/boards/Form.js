@@ -3,7 +3,7 @@ import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
 import newSelectableAssets, {useImages, useModalRender as useAssetsModalRender} from 'modules/mui-binder/libs/newSelectableAssets'
 import newDateTimeRange from 'modules/mui-binder/libs/newDateTimeRange'
-import newTinyMceEditor from 'modules/mui-binder/libs/newTinyMceEditor'
+import {newTinyMceEditorWithModalPicker} from 'modules/mui-binder/libs/newTinyMceEditor'
 import newSelectableLabels, {useLabels, useModalRender as useLabelsModalRender} from 'modules/mui-binder/libs/newSelectableLabels'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
@@ -23,7 +23,7 @@ export default function Form({save, subject}) {
     fullWidth: true, disabled: !!subject.slug,
   })
   const title = newTextField({defaultValue: subject.title || "", label: "Title", required: true, fullWidth: true})
-  const content = newTinyMceEditor({defaultValue: subject.content_text})
+
   const assetsModule = useImages({
     baseQuery: {
       limit: 18,
@@ -53,6 +53,9 @@ export default function Form({save, subject}) {
     max: 10,
   })
   const labelRender = useLabelsModalRender(labels, {label: 'Labels'})
+
+  const content = newTinyMceEditorWithModalPicker({defaultValue: subject.content_text}, {assetsModule})
+  // const contentRender = useModalPicker(content, {assetsModule})
 
   const body = {
     start_at: publishRange.startAt.value,

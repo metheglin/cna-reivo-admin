@@ -6,15 +6,16 @@ import {useTheme} from '@themes/default'
 const toolbar = "formatselect | bold italic underline strikethrough | numlist bullist | image link"
 const plugins = ["fullscreen", "link", "table", "lists", "image"]
 
-const initProps = {
+const defaultInitProps = {
   plugins, toolbar,
   height: 400,
   menubar: false,
   branding: false,
 }
 
-export default function newTinyMceEditor({defaultValue, ...props}) {
+export default function newTinyMceEditor({defaultValue, assetsModule, ...props}) {
   const theme = useTheme()
+  const {init} = props
   const skin = theme.paletteType === 'dark' ?
     {skin: "oxide-dark", content_css: "dark",} :
     {}
@@ -24,9 +25,11 @@ export default function newTinyMceEditor({defaultValue, ...props}) {
     <Editor {...props}
       apiKey="q0at5wch0ut06ov3rnokh8jffwakzuld6mh392wkbyf7d6qg"
       value={defaultValue}
-      init={{...skin, ...initProps}}
+      init={{...skin, ...defaultInitProps, ...init}}
       onEditorChange={(x)=>setValue(x)} />
   ), [defaultValue])
 
   return {value, render}
 }
+
+export {default as newTinyMceEditorWithModalPicker} from './withModalPicker'
