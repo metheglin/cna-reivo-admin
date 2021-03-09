@@ -1,0 +1,36 @@
+import React from 'react'
+import DashBar from 'components/DashBar'
+import PublishStatus from 'components/PublishStatus'
+import PublishButton from 'components/PublishButton'
+
+import {useSession} from 'modules/rvadmin/core/SessionProvider'
+
+export default function SubDashBar({subject, setSubject}) {
+  if (!subject) return null
+  const {api, enqueueSnackbar} = useSession()
+  const onOpen = () => {
+    api.fetch(`{{apiPrefix}}/${subject.id}/open`, {method: "PATCH"}).then(res=>{
+      setSubject(res.data)
+      enqueueSnackbar(res.message, {variant: 'success', persist: false})
+    })
+  }
+  const onDraft = () => {
+    api.fetch(`{{apiPrefix}}/${subject.id}/draft`, {method: "PATCH"}).then(res=>{
+      setSubject(res.data)
+      enqueueSnackbar(res.message, {variant: 'success', persist: false})
+    })
+  }
+  const main = (
+    <React.Fragment>
+      <PublishStatus {...subject} />
+    </React.Fragment>
+  )
+  const sub = (
+    <PublishButton subject={subject} 
+      onOpen={onOpen}
+      onDraft={onDraft} />
+  )
+  return (
+    <DashBar main={main}>{sub}</DashBar>
+  )
+}

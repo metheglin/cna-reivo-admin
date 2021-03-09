@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Start new project
+
+```
+npx create-next-app your-awesome-project --example https://github.com/metheglin/cna-reivo-admin
+```
+
+## Plop Example
+
+```
+yarn run plop pages blog
+# ✔  ++ /components/blogs/index.js
+# ✔  ++ /components/blogs/Form.js
+# ✔  ++ /components/blogs/MainDashBar.js
+# ✔  ++ /components/blogs/SubDashBar.js
+# ✔  ++ /pages/blogs/index.js
+# ✔  ++ /pages/blogs/new.js
+# ✔  ++ /pages/blogs/[id].js
+
+yarn run plop pages blog /admin/blogs /api/v1/blogs
+```
