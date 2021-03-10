@@ -3,7 +3,7 @@ import FlashProvider from 'modules/rvadmin/core/FlashProvider'
 import SessionProvider from 'modules/rvadmin/core/SessionProvider'
 import {ThemeProvider} from '@themes/default'
 import {CssBaseline} from '@material-ui/core'
-import GlobalStyles from '../styles/GlobalStyles'
+import GlobalStyles from 'themes/default/GlobalStyles'
 import {QueryClient, QueryClientProvider} from 'react-query'
 const queryClient = new QueryClient()
 

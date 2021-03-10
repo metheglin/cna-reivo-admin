@@ -41,6 +41,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 npx create-next-app your-awesome-project --example https://github.com/metheglin/cna-reivo-admin
 ```
 
+`.env.local`
+
+```
+NEXT_PUBLIC_API_PREFIX=http://localhost:3000/admin_api/v1
+```
+
 ## Plop Example
 
 ```

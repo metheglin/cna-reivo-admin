@@ -2,7 +2,7 @@ import React, {useState, useMemo, useContext, createContext} from 'react'
 import { ThemeProvider as MuiThemeProvider, createMuiTheme, colors } from '@material-ui/core';
 import shadows from './shadows'
 import typography from './typography'
-import darkScrollbar from '../../styles/darkScrollbar'
+import darkScrollbar from './darkScrollbar'
 
 const ThemeContext = createContext({})
 

@@ -11,7 +11,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 
 import useUpdater from 'modules/rvadmin/core/useUpdater'
 
-export default (props) => {
+export default function newRowsPager(props) {
   const defaultLimit = props.defaultLimit || 60
   const {onPage, rowComponent, headers, tableProps} = props
 
