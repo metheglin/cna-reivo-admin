@@ -1,8 +1,10 @@
-import React, {useState, useEffect, useCallback, useContext, createContext} from 'react'
+import {Fragment, useState, useEffect, useCallback, useContext, createContext} from 'react'
 import {useRouter} from 'next/router'
 import AccessToken from '@modules/rvadmin/utils/AccessToken'
 import {useFlash} from 'modules/rvadmin/core/FlashProvider'
 import Api from 'modules/rvadmin/utils/Api'
+import Link from 'components/Link'
+import {ErrorLayout} from 'components/layouts'
 
 const SessionContext = createContext({})
 
@@ -18,20 +20,34 @@ export default function SessionProvider({children}) {
         router.push('/')
         return
       }
-      return (<React.Fragment>{children}</React.Fragment>)
+      return (<Fragment>{children}</Fragment>)
     } else if (status === 'authenticated') {
-      if (router.asPath.startsWith('/att/')) {
-        return (<React.Fragment>{children}</React.Fragment>)
-      } else {
+      if (router.asPath === '/') {
         router.push('/att/permissions')
         return
       }
-    } else { // logout
-      if (router.asPath.startsWith('/un/')) {
-        return (<React.Fragment>{children}</React.Fragment>)
+      if (router.asPath.startsWith('/att/')) {
+        return (<Fragment>{children}</Fragment>)
       } else {
+        return (
+          <ErrorLayout title="アクセスできません">
+            <Link href='/att/permissions'>アカウントを選択してください</Link>
+          </ErrorLayout>
+        )
+      }
+    } else { // logout
+      if (router.asPath === '/') {
         router.push('/un/signin')
         return
+      }
+      if (router.asPath.startsWith('/un/')) {
+        return (<Fragment>{children}</Fragment>)
+      } else {
+        return (
+          <ErrorLayout title="アクセスできません">
+            <Link href='/un/signin'>ログインしてください</Link>
+          </ErrorLayout>
+        )
       }
     }
   }, [router])
