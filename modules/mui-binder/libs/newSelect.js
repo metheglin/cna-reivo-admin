@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({defaultValue, options, label, required, helperText, ...props}) => {
+export default function newSelect({defaultValue, options, label, required, helperText, ...props}) {
   const [value, setValue] = useState(defaultValue || "")
   const items = useMemo(()=>{
     return Object.keys(options).map(k=>(

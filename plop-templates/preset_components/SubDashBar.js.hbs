@@ -2,6 +2,7 @@ import React from 'react'
 import DashBar from 'components/DashBar'
 import PublishStatus from 'components/PublishStatus'
 import PublishButton from 'components/PublishButton'
+import {CreatedAt, UpdatedAt} from 'components/Timestamps'
 
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 
@@ -23,6 +24,8 @@ export default function SubDashBar({subject, setSubject}) {
   const main = (
     <React.Fragment>
       <PublishStatus {...subject} />
+      <CreatedAt {...subject} />
+      <UpdatedAt {...subject} />
     </React.Fragment>
   )
   const sub = (

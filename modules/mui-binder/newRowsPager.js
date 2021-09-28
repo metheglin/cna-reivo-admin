@@ -20,13 +20,15 @@ export default function newRowsPager(props) {
 
   const [limit, setLimit] = useState(defaultLimit)
   const [page, setPage] = useState(0)
-  const turnPage = useCallback((newPage=0, newLimit=null) => {
+  const [baseQuery, setBaseQuery] = useState({})
+  const turnPage = useCallback((newQuery={}, newPage=0, newLimit=null) => {
     newLimit = newLimit || limit
     setLoading(true)
     setPage(newPage)
+    setBaseQuery(newQuery)
     const offset = newLimit * newPage
-    onPage({ limit: newLimit, offset, updateRows }).then(x=>setLoading(false))
-  }, [onPage, page, limit])
+    onPage({limit: newLimit, offset, baseQuery: newQuery, updateRows}).then(x=>setLoading(false))
+  }, [page, limit])
 
   const [rows, setRows] = useState([])
   const [total, setTotal] = useState(0)
@@ -52,11 +54,11 @@ export default function newRowsPager(props) {
           inputProps: { 'aria-label': 'rows per page' },
           native: true,
         }}
-        onChangePage={(event, newPage)=>turnPage(newPage)}
+        onChangePage={(event, newPage)=>turnPage(baseQuery, newPage)}
         onChangeRowsPerPage={(e)=>{
           const newLimit = parseInt(e.target.value, 10)
           setLimit(newLimit)
-          turnPage(0, newLimit)
+          turnPage(baseQuery, 0, newLimit)
         }}
         ActionsComponent={TablePaginationActions}
       />
@@ -64,7 +66,7 @@ export default function newRowsPager(props) {
   )
 
   return {
-    rows, total, limit, page, render, turnPage, loading
+    rows, total, limit, page, render, turnPage, loading,
   }
 }
 

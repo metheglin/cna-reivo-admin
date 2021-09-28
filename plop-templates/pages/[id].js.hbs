@@ -9,7 +9,7 @@ import {useApi} from 'modules/rvadmin/core/useApi'
 import {Form, MainDashBar, SubDashBar} from 'components{{pathPrefix}}'
 
 const getBreadcrumb = (id) => ([
-  {title: "Boards", url: '{{pathPrefix}}'},
+  {title: "{{titleCase name}}", url: '{{pathPrefix}}'},
   {title: id}
 ])
 
