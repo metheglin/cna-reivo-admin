@@ -11,16 +11,16 @@ const getSidebarPages = ({ability_kind}) => {
 
 export default function Sidebar(props) {
   const pages = getSidebarPages(props)
-  return <SidebarWithPages pages={pages} />
+  return <SidebarWithPages pages={pages} {...props} />
 }
 
-export function SidebarWithPages({pages}) {
+export function SidebarWithPages({pages, ...props}) {
   // TODO
   const activePage = null
   const onClose = () => {}
   // 
   const navItems = useMemo(()=>{
-    return renderItems({onClose, pages, activePage, depth: 0})
+    return renderItems({onClose, pages, activePage, depth: 0, ...props})
   })
   return (<React.Fragment>{navItems}</React.Fragment>)
 }
@@ -39,7 +39,7 @@ const reduceItems = (context) => {
   // const {page, items} = context
   const {onClose, activePage, items, depth, t} = context
   let {page} = context
-  const title = pageToTitleI18n(page, t)
+  const title = pageToTitle(page, t)
   if (page.children && page.children.length > 1) {
     const topLevel = activePage ? activePage.pathname.indexOf(`${page.pathname}/`) === 0 : false
     items.push(
@@ -70,17 +70,7 @@ const reduceItems = (context) => {
   return items
 }
 
-const pageToTitleI18n = (page) => {
-  return titleize(page.pathname)
-  // const path = page.subheader || page.pathname;
-  // return t(`pages.${path}`, { ignoreWarning: true }) || pageToTitle(page);
+const pageToTitle = (page, t) => {
+  const title = page.subheader || page.pathname.split(/[\/\-]/).map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  return t(title)
 }
-const titleize = (string) => string.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-
-
-
-
-
-
-
-

@@ -7,17 +7,18 @@ import GlobalStyles from 'themes/default/GlobalStyles'
 import {ErrorLayout} from 'components/layouts'
 import {QueryClient, QueryClientProvider} from 'react-query'
 const queryClient = new QueryClient()
+import i18n from 'modules/i18n'
 
 function MyApp(props) {
   const {pageProps, router, Component} = props
   const [status, setStatus] = useState()
 
   useEffect(async () => {
-    console.log('out router.route', router.route)
+    // console.log('out router.route', router.route)
     const pages = await router.pageLoader.getPageList()
-    console.log('pages', pages)
+    // console.log('pages', pages)
     const parsed = router._resolveHref({pathname: router.asPath}, pages)
-    console.log('parsed', parsed)
+    // console.log('parsed', parsed)
     if (typeof window !== 'undefined') {
       router.fetchComponent(parsed.pathname).then(res=>{
         // console.log('fetch success', res)

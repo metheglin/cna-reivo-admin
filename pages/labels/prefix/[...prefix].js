@@ -32,7 +32,7 @@ const PageInner = ({prefix}) => {
   const pager = newRowsPager({
     // defaultLimit: 4,
     tableProps: {size: 'medium'},
-    headers: ['path', 'name', 'serial', 'status', 'action'],
+    headers: ['Path', 'Name', 'Serial Code', 'Status', 'Action'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
       return session.api.fetch(`/labels`, {params: {prefix, offset, limit}}).then(response=>{
         updateRows(response.data, response.total)

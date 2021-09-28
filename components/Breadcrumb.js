@@ -2,6 +2,7 @@ import React from 'react'
 // import LinkNext from 'next/link'
 import Link from 'components/Link'
 import {Breadcrumbs, Typography, makeStyles} from '@material-ui/core'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -11,9 +12,10 @@ const useStyles = makeStyles((theme) => ({
 
 const renderListItem = ({title, url}, index) => {
   const classes = useStyles()
-  if (!url) return (<Typography key={index} color="textPrimary" className={classes.item}>{title}</Typography>)
+  const {t} = useTranslation()
+  if (!url) return (<Typography key={index} color="textPrimary" className={classes.item}>{t(title)}</Typography>)
   return (
-    <Link key={index} color="inherit" href={url} className={classes.item}>{title}</Link>
+    <Link key={index} color="inherit" href={url} className={classes.item}>{t(title)}</Link>
   )
 }
 

@@ -9,9 +9,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import AccountMenu from 'components/AccountMenu'
-import Breadcrumb from 'components/Breadcrumb'
 import Sidebar from 'components/Sidebar'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 
 const drawerWidth = 260
 const useStyles = makeStyles((theme) => ({
@@ -112,6 +112,7 @@ const FrameLayout = ({title, url, dashBar, children}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   const session = useSession()
+  const {t} = useTranslation()
 
   return (
     <div className={classes.root}>
@@ -143,7 +144,7 @@ const FrameLayout = ({title, url, dashBar, children}) => {
           </IconButton>
         </div>
         <Divider />
-        <Sidebar {...session.payload.permission} />
+        <Sidebar {...session.payload.permission} t={t} />
         <Divider />
         {/*<List></List>*/}
       </Drawer>

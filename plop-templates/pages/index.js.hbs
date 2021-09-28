@@ -35,7 +35,7 @@ const Page = () => {
 
   const pager = newRowsPager({
     tableProps: {size: 'medium'},
-    headers: ['slug', 'title', 'created', 'status', 'action'],
+    headers: ['Slug', 'Title', 'Created', 'Status', 'Action'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
       return session.api.fetch(`{{apiPrefix}}`, {params: {offset, limit}}).then(response=>{
         updateRows(response.data, response.total)

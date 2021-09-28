@@ -10,10 +10,13 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 
 import useUpdater from 'modules/rvadmin/core/useUpdater'
+import {useTranslation} from 'react-i18next'
 
 export default function newRowsPager(props) {
+  const {t} = useTranslation()
   const defaultLimit = props.defaultLimit || 60
   const {onPage, rowComponent, headers, tableProps} = props
+  const headersTranslated = headers.map(x=>t(x))
 
   const [lastUpdatedAt, update] = useUpdater()
   const [loading, setLoading] = useState(false)
@@ -44,7 +47,7 @@ export default function newRowsPager(props) {
   }
 
   const render = (
-    <ItemListTemplate {...{tableProps,headers,rows,rowComponent,update,updateRowById}}>
+    <ItemListTemplate {...{tableProps,rows,rowComponent,update,updateRowById}} headers={headersTranslated}>
       <TablePagination colSpan={headers ? headers.length : 10}
         rowsPerPageOptions={[defaultLimit, defaultLimit*2]}
         count={total}

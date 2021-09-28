@@ -11,17 +11,17 @@ import {useQuery} from 'react-query'
 import {useFlash} from 'modules/rvadmin/core/FlashProvider'
 import Api from 'modules/rvadmin/utils/Api'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 
 const Page = () => {
   const session = useSession()
   const router = useRouter()
-  const {handleApiError} = useFlash()
-  const api = Api.json({handleApiError})
+  const {t} = useTranslation()
 
   return (
     <FrameLayout 
       breadcrumb={[{title: "Home", url: "/"}, {title: "About", url: "/about"}]}>
-      <Typography>Hello!</Typography>
+      <Typography>{t('Hello!')}</Typography>
     </FrameLayout>
   )
 }

@@ -8,10 +8,12 @@ import {CenterLayout} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useQuery} from 'react-query'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation, Trans} from 'react-i18next'
 
 const Page = () => {
   const session = useSession()
   const router = useRouter()
+  const {t} = useTranslation()
   const {isLoading, error, data} = useQuery('permissions', ()=>session.api.fetch('/permissions').then(res=>res.data))
 
   const selectAccount = (permissionId) => {
@@ -24,6 +26,8 @@ const Page = () => {
     })
   }
 
+  const email = session.payload.email || 'localhost'
+
   return (
     <CenterLayout>
       <Container maxWidth="sm">
@@ -31,7 +35,9 @@ const Page = () => {
         <Box mb={3}>
           <Typography color="textPrimary" variant="h4">Select Account</Typography>
           <Typography color="textSecondary" gutterBottom variant="body2">
-            You&apos;re logging in by <code>{session.payload.email}</code>
+            <Trans i18nKey="You're logging in with" email={email}>
+              You're logging in with <code>{{email}}</code>
+            </Trans>
           </Typography>
         </Box>
 
@@ -47,10 +53,12 @@ const Page = () => {
         </Box>
 
         <Typography color="textSecondary" variant="body1">
-          Don&apos;t have an account?{' '}
-          Try {' '}<Link href="#" onClick={()=>session.logout()}>
-            Log out
-          </Link>{' '}and signin again.
+          <Trans i18nKey="Don't have a party account?">
+            Don&apos;t have a party account?
+            Try <Link href="#" onClick={()=>session.logout()}>
+              Log out
+            </Link>{' '}and signin again.
+          </Trans>
         </Typography>
       </Container>
     </CenterLayout>

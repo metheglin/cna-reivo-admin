@@ -23,8 +23,8 @@ export default function Form({save, prefix, subject}) {
   })
   const name = newTextField({defaultValue: subject.name || "", label: "Name", required: true, fullWidth: true})
   const serial_code = newTextField({
-    defaultValue: subject.serial_code, label: "並び替え用コード", type: 'number',
-    helperText: '数値が高い順に並んで表示されます',
+    defaultValue: subject.serial_code, label: "Serial Code", type: 'number',
+    helperText: 'Sorted from larger to smaller',
   })
   const assetsModule = useImages({
     baseQuery: {
