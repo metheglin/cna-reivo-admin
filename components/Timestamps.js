@@ -1,12 +1,20 @@
-import {Chip} from '@material-ui/core'
-import {formatDistance} from 'date-fns'
+import {Chip, Tooltip} from '@material-ui/core'
+import {format, formatDistance} from 'date-fns'
+
+export function Timestamp({prefix, datetime}) {
+  if (!datetime) return null
+  const label = [prefix, formatDistance(new Date(datetime), new Date(), {addSuffix: true})].filter(x=>x).join(' ')
+  return (
+    <Tooltip interactive title={format(new Date(datetime), "yyyy-MM-dd HH:mm:ssxxx")}>
+      <Chip size="small" variant="outlined" label={label} />
+    </Tooltip>
+  )
+}
 
 export function CreatedAt({created_at}) {
-  if (!created_at) return null
-  return (<Chip size="small" variant="outlined" label={`Created ${formatDistance(new Date(created_at), new Date(), {addSuffix: true})}`} />)
+  return (<Timestamp datetime={created_at} prefix="Created" />)
 }
 
 export function UpdatedAt({updated_at}) {
-  if (!updated_at) return null
-  return (<Chip size="small" variant="outlined" label={`Updated ${formatDistance(new Date(updated_at), new Date(), {addSuffix: true})}`} />)
+  return (<Timestamp datetime={updated_at} prefix="Updated" />)
 }
