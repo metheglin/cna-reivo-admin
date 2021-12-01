@@ -11,6 +11,7 @@ module.exports = plop => {
   plop.setHelper('scopeCase', scopeCase);
   plop.setHelper('urlCase', urlCase);
 
+  // EXAMPLE: yarn run plop pages blog
   plop.setGenerator('pages', {
     description: 'Create CRUD pages',
     prompts: [
@@ -57,6 +58,46 @@ module.exports = plop => {
       }))
 
       return actionsPresetComponents.concat(actionsPages)
+    }
+  })
+
+  // EXAMPLE: yarn run plop mui-bind-module article
+  plop.setGenerator('mui-bind-module', {
+    description: 'Create mui-bind module',
+    prompts: [
+      {
+        type: 'input',
+        name: 'inputName',
+        message: 'What is your subject name? ex: article',
+      },
+      {
+        type: 'input',
+        name: 'inputApiPrefix',
+        message: 'What is the api path prefix? ex: /api/articles',
+        default: null,
+      },
+    ],
+    actions: ({inputName, inputApiPrefix}) => {
+      const name        = snakeCase(pluralize.singular(inputName))
+      const namePlural  = snakeCase(pluralize(inputName))
+      const apiPrefix   = inputApiPrefix ? inputApiPrefix : `/${urlCase(namePlural)}`
+      const data  = {name, namePlural, apiPrefix}
+      console.log(data)
+      
+      const moduleComponents = {
+        'index': 'index',
+        'use': `use${pascalCase(namePlural)}`,
+        'components/Row': `components/${pascalCase(name)}Row`,
+        'components/SelectorModal': `components/${pascalCase(namePlural)}SelectorModal`,
+        'components/ButtonModal': `components/${pascalCase(namePlural)}ButtonModal`,
+      }
+      return Object.keys(moduleComponents).map(key=>({
+        type: 'add',
+        path: `modules/mui-binder/libs/${name}/${moduleComponents[key]}.js`,
+        templateFile: `plop-templates/mui-binder-module/${key}.js.hbs`,
+        skipIfExists: true,
+        data: data,
+      }))
     }
   })
 };
