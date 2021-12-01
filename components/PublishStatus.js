@@ -1,79 +1,42 @@
-import React from 'react'
-import {Chip, Typography, makeStyles} from '@material-ui/core';
-import { formatDistance } from 'date-fns'
-import ja from 'date-fns/locale/ja'
+import {Chip, Tooltip} from '@material-ui/core';
+import { formatDistance, formatDistanceToNow } from 'date-fns'
+// import ja from 'date-fns/locale/ja'
 
-const useStyles = makeStyles({
-  caption: {
-    fontSize: '0.65rem',
+const checkPublishStatus = ({start_at, end_at, status}) => {
+  const daysLeftToPublish = Math.ceil((new Date(start_at) - new Date()) / (60 * 60 * 24 * 1000))
+  const daysLeftToUnPublish = Math.ceil((new Date(end_at) - new Date()) / (60 * 60 * 24 * 1000))
+  if (!start_at || !end_at) {
+    return (status === "opened") ?
+      ["published", "primary", null] :
+      ["not published", "secondary", null]
   }
-})
 
-const statusMap = {
-  published: {
-    color: "primary",
-    label: "published",
-  },
-  unpublished: {
-    color: "secondary",
-    label: "not published",
+  if (status !== "opened") {
+    return ["not published", "default", "Never be publishing"]
+  }
+  if (daysLeftToUnPublish <= 0) {
+    return ["not published", "default", `Expired ${formatDistance(new Date(end_at), new Date())} ago`]
+  }
+  if (daysLeftToPublish > 0) {
+    const color = daysLeftToPublish <= 7 ? "secondary" : "default"
+    const info = [
+      "Waiting to be published",
+      daysLeftToPublish <= 7 ? formatDistanceToNow(new Date(start_at)) : null
+    ].join(' ')
+    return ["not published", color, info]
+  } else {
+    const color = daysLeftToUnPublish <= 14 ? "secondary" : "primary"
+    const info = daysLeftToUnPublish <= 14 ? `Will be closed ${formatDistanceToNow(new Date(end_at))}` : null
+    return ["published", color, info]
   }
 }
 
-export default function PublishStatus(props) {
-  const classes = useStyles()
-  const dt1= new Date(props.start_at)
-  const dt2= new Date(props.end_at)
-  const publicDay = Math.ceil(( dt1 - new Date()) / (60 * 60 * 24 * 1000))
-  const privateDay = Math.ceil((dt2 - new Date()) / (60 * 60 * 24 * 1000))
-  const publicLimit = 3
-  const privateLimit = 30
-  let status = null
-  let info = null
-  
-  if (props.start_at && props.end_at) {
-    if (props.status === "opened") {
-      if (privateDay > 0) {
-        if (publicDay > 0) {
-          status = "unpublished"
-          if (publicDay <= publicLimit) {
-            info = [
-              `${formatDistance(dt1, new Date(), { addSuffix: true, locale: ja })}に公開`, 
-              'secondary'
-            ]
-          }
-        } else {
-          status = "published"
-          if (privateDay <= privateLimit) {
-            info = [
-              `${formatDistance(dt2, new Date(), { addSuffix: true, locale: ja })}に終了`,
-              'secondary'
-            ]
-          }
-        }
-      } else {
-        status = "unpublished"
-        info = ["公開予定なし", "inherit"]
-      }
-    } else {
-      status = "unpublished"
-      info = ["公開予定なし", "inherit"]
-    }
+export default function PublishStatus({start_at, end_at, status}) {
+  const [label, color, info] = checkPublishStatus({start_at, end_at, status})
+  const StatusComponent = (<Chip size="small" variant="outlined" label={label} color={color} />)
+  if (info) {
+    return (<Tooltip interactive title={info}>{StatusComponent}</Tooltip>)
   } else {
-    if (props.status === "opened") {
-      status = "published"
-    } else {
-      status = "unpublished"
-    }
+    return StatusComponent
   }
-
-  const {color: statusColor, label: statusLabel} = statusMap[status] || {}
-  const [infoLabel, infoColor] = info || []
-
-  return (
-    <React.Fragment>
-      {statusLabel && <Chip size="small" variant="outlined" label={statusLabel} color={statusColor} />}{' '}
-      {infoLabel && <Typography className={classes.caption} variant="caption" color={infoColor}>{infoLabel}</Typography>}
-    </React.Fragment>
-  )
 }
