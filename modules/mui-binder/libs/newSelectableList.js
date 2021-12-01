@@ -15,3 +15,16 @@ export default function newSelectableList({defaultValue, max}) {
 
   return accessors
 }
+
+export function useSelector(props) {
+  const accessors = newSelectableList(props)
+  const {values, pushValue, removeValues} = accessors
+  const onRemove = item => removeValues(x=>x.id === item.id)
+  const onPush = item => pushValue(item)
+  const isSelected = item => values.map(x=>x.id).includes(item.id)
+
+  return {
+    ...accessors,
+    onRemove, onPush, isSelected,
+  }
+}
