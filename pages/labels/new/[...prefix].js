@@ -33,7 +33,9 @@ const PageInner = ({prefix}) => {
   const session = useSession()
 
   const save = (body) => {
-    return session.api.fetch('/labels', {method: 'POST', body}).then(res=>router.push(`/labels/${res.data.id}`))
+    return session.api.fetch('/labels', {method: 'POST', body}).then(res=>{
+      router.push({pathname: `/labels/${res.data.id}`, query: {prefix}})
+    })
   }
 
   return (<FrameLayoutWrapper><Form {...{save, prefix}} /></FrameLayoutWrapper>)
