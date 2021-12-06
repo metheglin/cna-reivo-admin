@@ -34,7 +34,7 @@ const PageInner = ({prefix}) => {
     tableProps: {size: 'medium'},
     headers: ['Path', 'Name', 'Serial Code', 'Status', 'Action'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
-      return session.api.fetch(`/labels`, {params: {prefix, offset, limit}}).then(response=>{
+      return session.api.fetch(`/labels`, {params: {...baseQuery, offset, limit}}).then(response=>{
         updateRows(response.data, response.total)
       })
     },
@@ -62,7 +62,7 @@ const PageInner = ({prefix}) => {
   })
 
   useEffect(()=>{
-    pager.turnPage()
+    pager.turnPage({prefix})
   }, [prefix])
 
   return (
