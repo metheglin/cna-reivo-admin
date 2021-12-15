@@ -18,6 +18,10 @@ export const defaultPages = [
     ]
   },
   {
+    pathname: '/staffs',
+    subheader: 'Staffs',
+  },
+  {
     pathname: '/getting-started',
     children: [
       { pathname: '/getting-started/installation' },
