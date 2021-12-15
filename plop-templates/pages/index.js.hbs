@@ -37,7 +37,7 @@ const Page = () => {
     tableProps: {size: 'medium'},
     headers: ['Slug', 'Title', 'Created', 'Status', 'Action'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
-      return session.api.fetch(`{{apiPrefix}}`, {params: {offset, limit}}).then(response=>{
+      return session.api.fetch(`{{apiPrefix}}`, {params: {...baseQuery, offset, limit}}).then(response=>{
         updateRows(response.data, response.total)
       })
     },
