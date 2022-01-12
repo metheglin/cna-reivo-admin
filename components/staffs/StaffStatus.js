@@ -1,5 +1,5 @@
-import {Chip, Button, Tooltip} from '@material-ui/core'
-import CachedIcon from '@material-ui/icons/Cached'
+import {Chip, Button, Tooltip} from '@mui/material'
+import CachedIcon from '@mui/icons-material/Cached'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 // import {staffStatus, staffAction} from 'constants/status'
 

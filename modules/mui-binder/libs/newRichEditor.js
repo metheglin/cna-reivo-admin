@@ -1,5 +1,5 @@
 import React, {useState,useMemo,useRef} from 'react'
-import InputLabel from '@material-ui/core/InputLabel'
+import InputLabel from '@mui/material/InputLabel'
 // https://draftjs.org/docs/api-reference-data-conversion/
 import {
   // ContentState,
@@ -9,7 +9,7 @@ import {
 
 // https://github.com/niuware/mui-rte
 import MUIRichTextEditor from 'mui-rte'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
 
 import {stateToHTML} from 'draft-js-export-html';
 import {stateFromHTML} from 'draft-js-import-html';
@@ -62,7 +62,7 @@ const importOptions = {
 
 const makeHtml = (cs) => stateToHTML(cs, exportOptions)
 
-const innerTheme = theme => createMuiTheme({
+const innerTheme = theme => createTheme(adaptV4Theme({
   ...theme,
   overrides: {
     MUIRichTextEditor: {
@@ -83,7 +83,7 @@ const innerTheme = theme => createMuiTheme({
       }
     }
   }
-})
+}))
 
 export default ({defaultValue, controls, label}) => {
   const ref = useRef()
@@ -95,24 +95,26 @@ export default ({defaultValue, controls, label}) => {
   // console.log({raw})
   
   const render = (
-    <MuiThemeProvider theme={innerTheme}>
-      {label && <InputLabel>{label}</InputLabel>}
-      <MUIRichTextEditor 
-        ref={ref}
-        value={JSON.stringify(raw)} 
-        toolbarButtonSize="small"
-        controls={controls || [
-          "title", "bold", "italic", "underline", "strikethrough", "highlight", 
-          "undo", "redo", "link", // "media", 
-          "numberList", "bulletList", 
-          "quote", "code", "clear", // "save"
-        ]}
-        onChange={(es)=>{
-          const cs = es.getCurrentContent()
-          // console.log('ho', convertToRaw(cs))
-          setHtml(makeHtml(cs))
-        }} />
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={innerTheme}>
+        {label && <InputLabel>{label}</InputLabel>}
+        <MUIRichTextEditor 
+          ref={ref}
+          value={JSON.stringify(raw)} 
+          toolbarButtonSize="small"
+          controls={controls || [
+            "title", "bold", "italic", "underline", "strikethrough", "highlight", 
+            "undo", "redo", "link", // "media", 
+            "numberList", "bulletList", 
+            "quote", "code", "clear", // "save"
+          ]}
+          onChange={(es)=>{
+            const cs = es.getCurrentContent()
+            // console.log('ho', convertToRaw(cs))
+            setHtml(makeHtml(cs))
+          }} />
+      </ThemeProvider>
+    </StyledEngineProvider>
   )
 
   return {

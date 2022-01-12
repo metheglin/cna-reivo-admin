@@ -1,25 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import {format, isValid} from 'date-fns'
-import DateFnsUtils from '@date-io/date-fns'
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import {
-  MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
-} from '@material-ui/pickers'
-import { createMuiTheme } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
+  LocalizationProvider, DateTimePicker
+} from '@mui/lab'
+import {TextField} from "@mui/material";
 
-const innerTheme = theme => createMuiTheme({
-  ...theme,
-  overrides: {
-    // MuiFormControl: {
-    //   root: {
-    //     width: '50%',
-    //   }
-    // }
-  }
-})
-
-export default function newDateTime({defaultValue, label}) {
+export default function newDateTime({defaultValue, label, helperText}) {
   const [date, setDate] = useState(defaultValue ? new Date(defaultValue) : new Date)
   const [lastValidDate, setLastValidDate] = useState(null)
   const setSelectedWithValidity = date => {
@@ -36,19 +23,19 @@ export default function newDateTime({defaultValue, label}) {
   useEffect(()=>reset(), [defaultValue])
 
   const render = (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <ThemeProvider theme={innerTheme}>
-        <KeyboardDateTimePicker
-          fullWidth
-          variant="inline"
-          ampm={false}
-          label={label || " "}
-          value={date}
-          onChange={date=>setSelectedWithValidity(date)}
-          format="yyyy/MM/dd HH:mm"
-        />
-      </ThemeProvider>
-    </MuiPickersUtilsProvider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DateTimePicker
+        fullWidth
+        variant="inline"
+        ampm={false}
+        label={label}
+        renderInput={(params) => <TextField {...params} />}
+        value={date}
+        onChange={date=>setSelectedWithValidity(date)}
+        inputFormat="yyyy-MM-dd HH:mm"
+        mask="____-__-__ __:__"
+      />
+    </LocalizationProvider>
   )
 
   return { 

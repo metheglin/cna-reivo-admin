@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import {List} from '@material-ui/core'
+import {List} from '@mui/material'
 import SidebarItem from './SidebarItem'
 import sidebarProps from 'constants/sidebar'
 

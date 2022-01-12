@@ -1,7 +1,6 @@
 import React from 'react'
-import {
-  makeStyles, Typography, Toolbar, Tooltip, IconButton, Icon, Divider,
-} from '@material-ui/core'
+import { Typography, Toolbar, Tooltip, IconButton, Icon, Divider } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from 'next/router'
 import Breadcrumb from 'components/Breadcrumb'
 

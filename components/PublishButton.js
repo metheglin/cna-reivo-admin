@@ -1,7 +1,7 @@
 import React from 'react'
-import {Button, Tooltip} from '@material-ui/core'
-import CachedIcon from '@material-ui/icons/Cached'
-import RestoreIcon from '@material-ui/icons/Restore'
+import {Button, Tooltip} from '@mui/material'
+import CachedIcon from '@mui/icons-material/Cached'
+import RestoreIcon from '@mui/icons-material/Restore'
 
 export default function Component({subject, onOpen, onDraft, ...props}) {
   const {status} = subject

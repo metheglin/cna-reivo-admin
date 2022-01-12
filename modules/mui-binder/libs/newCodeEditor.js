@@ -1,5 +1,5 @@
 import React, {useState,useMemo,useEffect} from 'react'
-import {makeStyles} from '@material-ui/core'
+import makeStyles from '@mui/styles/makeStyles';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'

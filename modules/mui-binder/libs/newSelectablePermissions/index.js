@@ -1,12 +1,23 @@
 import React, {useState,useEffect} from 'react'
 import {
-  makeStyles, Grid, Typography, InputAdornment, Chip, IconButton, InputLabel, CircularProgress, TableCell,
-  List, ListItem, ListItemText, ListItemSecondaryAction
-} from '@material-ui/core'
-import Link from '@material-ui/core/Link'
-import CancelIcon from '@material-ui/icons/Cancel'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
-import AddIcon from '@material-ui/icons/Add'
+  Grid,
+  Typography,
+  InputAdornment,
+  Chip,
+  IconButton,
+  InputLabel,
+  CircularProgress,
+  TableCell,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import Link from '@mui/material/Link'
+import CancelIcon from '@mui/icons-material/Cancel'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+import AddIcon from '@mui/icons-material/Add'
 import newSelectableList from '../newSelectableList'
 import {ItemListTemplate} from '../../newRowsPager'
 
@@ -30,10 +41,10 @@ const Row = ({row, selected, onPush, onRemove}) => {
     <ListItem  className={selected ? classes.selected : null}>
       <ListItemText primary={row.ability_kind} secondary={row.client} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" onClick={onClick}>{icon}</IconButton>
+        <IconButton edge="end" onClick={onClick} size="large">{icon}</IconButton>
       </ListItemSecondaryAction>
     </ListItem>
-  )
+  );
 }
 
 export const Collection = ({objects, isSelected, onPush, onRemove}) => (

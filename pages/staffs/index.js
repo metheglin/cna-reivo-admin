@@ -2,7 +2,7 @@ import React, {useState, useEffect, useMemo, useCallback} from 'react'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import {
   Button, Chip, TableCell, TableContainer, Paper, Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 import Link from 'components/Link'
 import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 // import {useRouter} from 'next/router'
@@ -12,7 +12,7 @@ import {MainDashBar, StaffStatus} from 'components/staffs'
 import {CreatedAt} from 'components/Timestamps'
 
 // NOTE: Comment-in to enable search
-// import {TextField} from '@material-ui/core'
+// import {TextField} from '@mui/material'
 // import {SearchPaper} from 'components/SearchPaper'
 
 const getBreadcrumb = () => ([

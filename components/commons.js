@@ -1,5 +1,5 @@
-import {Button, Chip} from '@material-ui/core'
-import GetAppIcon from '@material-ui/icons/GetApp'
+import {Button, Chip} from '@mui/material'
+import GetAppIcon from '@mui/icons-material/GetApp'
 
 export function DownloadButton({children, ...props}) {
   return (

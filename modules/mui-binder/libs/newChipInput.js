@@ -1,7 +1,7 @@
 import React, {useState,useMemo,useCallback} from 'react'
 import ChipInput from 'material-ui-chip-input'
-import InputLabel from '@material-ui/core/InputLabel'
-// import { makeStyles, useTheme } from '@material-ui/core/styles'
+import InputLabel from '@mui/material/InputLabel'
+// import { makeStyles, useTheme } from '@mui/material/styles'
 
 // const useStyles = makeStyles(theme => ({
 //   root: {

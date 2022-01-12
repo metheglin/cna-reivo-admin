@@ -1,5 +1,7 @@
 import {useState} from 'react'
-import {makeStyles, Modal} from '@material-ui/core'
+import { Modal } from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles({
   img: {

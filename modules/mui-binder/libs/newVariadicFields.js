@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 // import ChipInput from 'material-ui-chip-input'
-import InputLabel from '@material-ui/core/InputLabel'
-import { makeStyles } from '@material-ui/core/styles'
-import Icon from '@material-ui/core/Icon';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@mui/material/InputLabel'
+import makeStyles from '@mui/styles/makeStyles';
+import Icon from '@mui/material/Icon';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {

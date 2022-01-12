@@ -1,8 +1,8 @@
 import {
   Button, Paper, Grid, Box,
-} from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
-import RotateLeftIcon from '@material-ui/icons/RotateLeft'
+} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 
 export function SearchPaper({children, onSearch, onReset}) {
   return (

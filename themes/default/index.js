@@ -1,5 +1,11 @@
 import React, {useState, useMemo, useContext, createContext} from 'react'
-import { ThemeProvider as MuiThemeProvider, createMuiTheme, colors } from '@material-ui/core';
+import {
+  ThemeProvider as MuiThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+  colors,
+  adaptV4Theme,
+} from '@mui/material';
 import shadows from './shadows'
 import typography from './typography'
 import darkScrollbar from './darkScrollbar'
@@ -56,7 +62,7 @@ export function ThemeProvider({children}) {
   }, [paletteType])
 
   const theme = useMemo(()=>{
-    const nextTheme = createMuiTheme({
+    const nextTheme = createTheme(adaptV4Theme({
       nprogress: {
         color: paletteType === 'light' ? '#000' : '#fff',
       },
@@ -68,7 +74,7 @@ export function ThemeProvider({children}) {
           paddingRight: 16,
         }
       }
-    },{
+    }, {
       components: {
         MuiCssBaseline: {
           styleOverrides: {
@@ -76,7 +82,7 @@ export function ThemeProvider({children}) {
           },
         },
       },
-    }, shadows, typography)
+    }, shadows, typography))
     nextTheme.palette.background.level2 =
       paletteType === 'light' ? nextTheme.palette.grey[100] : '#424242'
     nextTheme.palette.background.level1 =
@@ -86,11 +92,13 @@ export function ThemeProvider({children}) {
 
   return (
     <ThemeContext.Provider value={{paletteType, setPaletteType}}>
-      <MuiThemeProvider theme={theme}>
-        {children}
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <MuiThemeProvider theme={theme}>
+          {children}
+        </MuiThemeProvider>
+      </StyledEngineProvider>
     </ThemeContext.Provider>
-  )
+  );
 }
 
 export const useTheme = () => useContext(ThemeContext)

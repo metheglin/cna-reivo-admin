@@ -1,11 +1,18 @@
 import {Fragment, useState} from 'react'
 import {
-  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid, InputLabel, 
-  GridList, List,
-} from '@material-ui/core'
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button,
+  Grid,
+  InputLabel,
+  ImageList,
+  List,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {LabelRow} from './LabelRow'
 import Link from 'next/link'
-import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@mui/icons-material/Add'
 
 const useStyles = makeStyles(theme=>({
   grow: {
@@ -67,7 +74,7 @@ export default function LabelsSelectorModal({selector, sourceLabels, label}) {
 
   return (
     <Fragment>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           {label && <InputLabel shrink>{label}</InputLabel>}
         </Grid>
@@ -80,15 +87,16 @@ export default function LabelsSelectorModal({selector, sourceLabels, label}) {
 
       <Dialog
         className={classes.root}
-        disableBackdropClick
         disableEscapeKeyDown
         fullWidth={true}
         maxWidth={false}
-        onEntering={()=>{}}
         aria-labelledby="confirmation-dialog-title"
-        open={open}>
+        open={open}
+        TransitionProps={{
+          onEntering: ()=>{}
+        }}>
         <DialogContent dividers>
-          <Grid container justify="space-between" spacing={1}>
+          <Grid container justifyContent="space-between" spacing={1}>
             <Grid item sm={3}>
               <div className={classes.selector}>{renderSelector}</div>
             </Grid>
@@ -107,5 +115,5 @@ export default function LabelsSelectorModal({selector, sourceLabels, label}) {
         </DialogActions>
       </Dialog>
     </Fragment>
-  )
+  );
 }

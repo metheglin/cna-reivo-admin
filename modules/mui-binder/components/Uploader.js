@@ -1,6 +1,6 @@
 import React from 'react'
 import {useDropzone} from 'react-dropzone'
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
   dashedArea: {

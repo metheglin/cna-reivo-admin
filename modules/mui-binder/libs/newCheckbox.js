@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
 
 export default ({defaultValue, label, helperText, ...props}) => {
   const [value, setValue] = useState(!!defaultValue)

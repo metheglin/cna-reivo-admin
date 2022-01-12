@@ -1,12 +1,12 @@
 import React, {useState, useMemo, useEffect} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import newRowsPager from 'components/organisms/newRowsPager'
 
-import Modal from '@material-ui/core/Modal'
-import TableCell from '@material-ui/core/TableCell'
-import IconButton from '@material-ui/core/IconButton'
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Modal from '@mui/material/Modal'
+import TableCell from '@mui/material/TableCell'
+import IconButton from '@mui/material/IconButton'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default ({onClick, headers, onPage, baseQuery, ListItemComponent, header}) => {
   const classes = useStyles()

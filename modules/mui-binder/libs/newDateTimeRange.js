@@ -1,6 +1,6 @@
 import React from 'react'
 import newDateTime from './newDateTime'
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 
 export default function newDateTimeRange({startAtProps, endAtProps, onChange}) {
   startAtProps = startAtProps || {}
@@ -17,7 +17,7 @@ export default function newDateTimeRange({startAtProps, endAtProps, onChange}) {
     ...endAtProps
   })
   const render = (
-    <Grid container justify="flex-start" spacing={2}>
+    <Grid container justifyContent="flex-start" spacing={2}>
       <Grid item md={6}>{startAt.render}</Grid>
       <Grid item md={6}>{endAt.render}</Grid>
     </Grid>

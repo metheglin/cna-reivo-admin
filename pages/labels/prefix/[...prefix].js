@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react'
 import {
   Button, Chip, TableCell, TableContainer, Paper, 
-} from '@material-ui/core';
+} from '@mui/material';
 import Link from 'components/Link'
 import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 import {useRouter} from 'next/router'

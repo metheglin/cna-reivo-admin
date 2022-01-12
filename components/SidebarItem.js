@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import clsx from 'clsx'
-import {makeStyles, fade} from '@material-ui/core/styles'
-const alpha = fade
-import {Collapse, ButtonBase} from '@material-ui/core'
+import {alpha} from '@mui/material/styles'
+import {makeStyles} from '@mui/styles';
+import {Collapse, ButtonBase} from '@mui/material'
 import Link from 'components/Link'
-import ArrowRightIcon from '@material-ui/icons/ArrowRight'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
 const useStyles = makeStyles((theme) => ({
   li: {

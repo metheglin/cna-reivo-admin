@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia'
-import Typography from '@material-ui/core/Typography'
-import CardActions from '@material-ui/core/CardActions'
-import AttachFileIcon from '@material-ui/icons/AttachFile'
+import makeStyles from '@mui/styles/makeStyles';
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import CardActions from '@mui/material/CardActions'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {

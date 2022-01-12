@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core'
+import { Link } from '@mui/material'
 
 export default function LinkInEditor({contentState, entityKey, children}) {
   const {url, className} = contentState.getEntity(entityKey).getData()

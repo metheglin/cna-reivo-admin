@@ -1,10 +1,17 @@
 import React, {useState, useMemo} from 'react'
 import {
-  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid,
-  InputLabel, GridList, GridListTile,
-} from '@material-ui/core'
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button,
+  Grid,
+  InputLabel,
+  ImageList,
+  ImageListItem,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import Link from 'next/link'
-import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@mui/icons-material/Add'
 import {getThumbnail} from 'modules/mui-binder/components/Asset'
 import newTinyMceEditor from './index.js'
 
@@ -17,13 +24,13 @@ const useStyles = makeStyles(theme=>({
 
 function AssetGridList({assets, onClick}) {
   return (
-    <GridList cellHeight={120} spacing={6} cols={12}>
+    <ImageList cellHeight={120} spacing={6} cols={12}>
       {assets.map((item,i) => (
-        <GridListTile key={i} onClick={()=>onClick(item)}>
+        <ImageListItem key={i} onClick={()=>onClick(item)}>
           <img src={getThumbnail(item)} alt={item.content_type} />
-        </GridListTile>
+        </ImageListItem>
       ))}
-    </GridList>
+    </ImageList>
   )
 }
 export default function withModalPicker(editorProps, {assetsModule}) {
@@ -45,15 +52,16 @@ export default function withModalPicker(editorProps, {assetsModule}) {
       {editor.render}
       <Dialog
         className={classes.root}
-        disableBackdropClick
         disableEscapeKeyDown
         fullWidth={true}
         maxWidth={false}
-        onEntering={()=>{}}
         aria-labelledby="confirmation-dialog-title"
-        open={imgOpen}>
+        open={imgOpen}
+        TransitionProps={{
+          onEntering: ()=>{}
+        }}>
         <DialogContent dividers>
-          <Grid container justify="space-between" spacing={1}>
+          <Grid container justifyContent="space-between" spacing={1}>
             <Grid item container>
               <Grid item container alignItems="center" spacing={1}>
                 <Grid item className={classes.grow}>{renderUploader}</Grid>

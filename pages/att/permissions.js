@@ -1,9 +1,17 @@
 import React from 'react'
 import {
-  Box,Button,Container,Grid,Link,TextField,Typography,makeStyles,CircularProgress
-} from '@material-ui/core';
-import FaceIcon from '@material-ui/icons/Face';
-import StarsIcon from '@material-ui/icons/Stars';
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import FaceIcon from '@mui/icons-material/Face';
+import StarsIcon from '@mui/icons-material/Stars';
 import {CenterLayout} from 'components/layouts'
 import {useRouter} from 'next/router'
 import {useQuery} from 'react-query'

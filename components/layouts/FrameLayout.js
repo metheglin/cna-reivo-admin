@@ -2,11 +2,23 @@ import React from 'react';
 import clsx from 'clsx'
 import Link from 'components/Link'
 import {
-  makeStyles, CssBaseline, Drawer, AppBar, Toolbar, List, Container, Box, Divider,
-  IconButton, Grid, Typography, Chip, Paper,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Container,
+  Box,
+  Divider,
+  IconButton,
+  Grid,
+  Typography,
+  Chip,
+  Paper,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import AccountMenu from 'components/AccountMenu'
 import Sidebar from 'components/Sidebar'
@@ -123,7 +135,8 @@ const FrameLayout = ({title, url, dashBar, children}) => {
             color="inherit"
             aria-label="open drawer"
             onClick={()=>setOpen(true)}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            size="large">
             <MenuIcon />
           </IconButton>
 
@@ -139,7 +152,7 @@ const FrameLayout = ({title, url, dashBar, children}) => {
         }}
         open={open}>
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={()=>setOpen(false)}>
+          <IconButton onClick={()=>setOpen(false)} size="large">
             <ChevronLeftIcon />
           </IconButton>
         </div>

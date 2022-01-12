@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
+import makeStyles from '@mui/styles/makeStyles';
+import Modal from '@mui/material/Modal'
 
 const useStyles = makeStyles(theme => ({
   paper: {

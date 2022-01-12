@@ -1,13 +1,18 @@
 import {Fragment} from 'react'
 import {
-  makeStyles, Avatar,
-  ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar,
-  GridListTile, GridListTileBar,
+  Avatar,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  ListItemAvatar,
+  ImageListItem,
+  ImageListItemBar,
   IconButton,
-} from '@material-ui/core'
-import CancelIcon from '@material-ui/icons/Cancel';
-import AddCircleIcon from '@material-ui/icons/AddCircle'
-import AttachFileIcon from '@material-ui/icons/AttachFile'
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import CancelIcon from '@mui/icons-material/Cancel';
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
 
 export function getThumbnail(item) {
   // if (item.rough_content_type !== 'image') return null
@@ -77,10 +82,10 @@ export function AssetRow({item, selected, onClick}) {
       </ListItemAvatar>
       <ListItemText primary={content_type} secondary={path} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" onClick={onClick}>{icon}</IconButton>
+        <IconButton edge="end" onClick={onClick} size="large">{icon}</IconButton>
       </ListItemSecondaryAction>
     </ListItem>
-  )
+  );
 }
 
 export function AssetTile({item, selected, onClick, style}) {
@@ -90,10 +95,10 @@ export function AssetTile({item, selected, onClick, style}) {
   const icon = selected ? <CancelIcon color="secondary" /> : <AddCircleIcon color="primary" />
   return (
     <Fragment>
-    <GridListTile className={selected ? classes.tileSelected : null} style={{...style}}>
+    <ImageListItem className={selected ? classes.tileSelected : null} style={{...style}}>
       {thumbnail ? <img src={thumbnail} alt={content_type} /> : <DefaultFile item={item} />}
-      <GridListTileBar actionIcon={<IconButton edge="end" onClick={onClick}>{icon}</IconButton>} />
-    </GridListTile>
+      <ImageListItemBar actionIcon={<IconButton edge="end" onClick={onClick} size="large">{icon}</IconButton>} />
+    </ImageListItem>
     </Fragment>
-  )
+  );
 }

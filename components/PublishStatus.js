@@ -1,4 +1,4 @@
-import {Chip, Tooltip} from '@material-ui/core';
+import {Chip, Tooltip} from '@mui/material';
 import { formatDistance, formatDistanceToNow } from 'date-fns'
 // import ja from 'date-fns/locale/ja'
 

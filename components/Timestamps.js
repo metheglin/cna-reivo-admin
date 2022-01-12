@@ -1,4 +1,4 @@
-import {Chip, Tooltip} from '@material-ui/core'
+import {Chip, Tooltip} from '@mui/material'
 import {format, formatDistance} from 'date-fns'
 
 export function Timestamp({prefix, datetime}) {

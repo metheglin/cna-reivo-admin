@@ -1,20 +1,20 @@
 import React, {useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-// import FormGroup from '@material-ui/core/FormGroup';
-import IconButton from '@material-ui/core/IconButton';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel'
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+// import FormGroup from '@mui/material/FormGroup';
+import IconButton from '@mui/material/IconButton';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel'
 
 import newCodeEditor from 'components/molecules/forms/newCodeEditor'
-import Modal from '@material-ui/core/Modal'
+import Modal from '@mui/material/Modal'
 import Uploader from '../components/Uploader'
 import AssetCard from '../components/AssetCard'
 import useImages from 'modules/rvadmin/core/useImages'
 
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 export default ({defaultValue, label, editorProps, assetsProps}) => {
   const classes = useStyles()

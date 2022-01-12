@@ -1,5 +1,5 @@
 import {CenterLayout} from 'components/layouts'
-import {Typography, Container, Box} from '@material-ui/core'
+import {Typography, Container, Box} from '@mui/material'
 
 export default function ErrorLayout({title, children}) {
   return (

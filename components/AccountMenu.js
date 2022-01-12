@@ -4,10 +4,10 @@ import {useTheme} from 'themes/default'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import {
   IconButton, Menu, MenuItem, FormControlLabel, Switch,
-} from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -18,7 +18,7 @@ export default function AccountMenu() {
 
   return (
     <React.Fragment>
-      <IconButton color="inherit" onClick={(e)=>setAnchorEl(e.currentTarget)}>
+      <IconButton color="inherit" onClick={(e)=>setAnchorEl(e.currentTarget)} size="large">
         <PersonIcon />
       </IconButton>
       <Menu
@@ -48,5 +48,5 @@ export default function AccountMenu() {
         </MenuItem>
       </Menu>
     </React.Fragment>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@mui/styles/makeStyles';
 
 const imageToCanvas = (img, width) => {
   const canvas = document.createElement('canvas')

@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Box } from '@material-ui/core';
+import { Box } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import PlainLayout from './PlainLayout'
 
 const useStyles = makeStyles((theme) => ({

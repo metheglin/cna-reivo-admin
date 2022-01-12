@@ -1,8 +1,15 @@
 import {Fragment, useState} from 'react'
 import {
-  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid, InputLabel, 
-  GridList, List,
-} from '@material-ui/core'
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button,
+  Grid,
+  InputLabel,
+  ImageList,
+  List,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {AssetTile, AssetRow} from './index.js'
 
 const useStyles = makeStyles(theme=>({
@@ -49,16 +56,16 @@ export default function AssetsSelectorModal({selector, sourceAssets, sourceUploa
   )
 
   const renderCollection = (
-    <GridList cellHeight={120} spacing={6} cols={12}>
+    <ImageList cellHeight={120} spacing={6} cols={12}>
       {sourceAssets.items.map((item,i) => (<AssetTile key={i} {...getItemProps(item)} />))}
-    </GridList>
+    </ImageList>
   )
 
   const renderUploader = sourceUploader ? sourceUploader.render : null
 
   return (
     <Fragment>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           {label && <InputLabel shrink>{label}</InputLabel>}
         </Grid>
@@ -71,15 +78,16 @@ export default function AssetsSelectorModal({selector, sourceAssets, sourceUploa
 
       <Dialog
         className={classes.root}
-        disableBackdropClick
         disableEscapeKeyDown
         fullWidth={true}
         maxWidth={false}
-        onEntering={()=>{}}
         aria-labelledby="confirmation-dialog-title"
-        open={open}>
+        open={open}
+        TransitionProps={{
+          onEntering: ()=>{}
+        }}>
         <DialogContent dividers>
-          <Grid container justify="space-between" spacing={1}>
+          <Grid container justifyContent="space-between" spacing={1}>
             <Grid item sm={3}>
               <div className={classes.selector}>{renderSelector}</div>
             </Grid>
@@ -99,5 +107,5 @@ export default function AssetsSelectorModal({selector, sourceAssets, sourceUploa
         </DialogActions>
       </Dialog>
     </Fragment>
-  )
+  );
 }

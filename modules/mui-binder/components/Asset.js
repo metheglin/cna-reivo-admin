@@ -1,6 +1,6 @@
-import {
-  makeStyles, Avatar
-} from '@material-ui/core'
+import { Avatar } from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 export function getThumbnail(item) {
   if (item.rough_content_type !== 'image') return null

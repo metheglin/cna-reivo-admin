@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Grid, InputAdornment} from '@material-ui/core'
+import {Grid, InputAdornment} from '@mui/material'
 import newTextField from 'modules/mui-binder/libs/newTextField'
 import newSelectablePermissions from 'modules/mui-binder/libs/newSelectablePermissions'
 import HelpTip from 'components/HelpTip'

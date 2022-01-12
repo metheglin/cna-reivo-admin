@@ -1,13 +1,14 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import makeStyles from '@mui/styles/makeStyles';
+import withStyles from '@mui/styles/withStyles';
 import {
   Table, TableBody, TableHead, TableRow, TableFooter, TablePagination, IconButton, 
-} from '@material-ui/core'
-import {default as MuiTableCell} from '@material-ui/core/TableCell'
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
+} from '@mui/material'
+import {default as MuiTableCell} from '@mui/material/TableCell'
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
 
 import useUpdater from 'modules/rvadmin/core/useUpdater'
 import {useTranslation} from 'react-i18next'
@@ -57,8 +58,8 @@ export default function newRowsPager(props) {
           inputProps: { 'aria-label': 'rows per page' },
           native: true,
         }}
-        onChangePage={(event, newPage)=>turnPage(baseQuery, newPage)}
-        onChangeRowsPerPage={(e)=>{
+        onPageChange={(event, newPage)=>turnPage(baseQuery, newPage)}
+        onRowsPerPageChange={(e)=>{
           const newLimit = parseInt(e.target.value, 10)
           setLimit(newLimit)
           turnPage(baseQuery, 0, newLimit)
@@ -132,24 +133,31 @@ const TablePaginationActions = (props) => {
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
-        aria-label="first page">
+        aria-label="first page"
+        size="large">
         <FirstPageIcon />
       </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+        size="large">
         <KeyboardArrowLeft />
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page">
+        aria-label="next page"
+        size="large">
         <KeyboardArrowRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page">
+        aria-label="last page"
+        size="large">
         <LastPageIcon />
       </IconButton>
     </div>
-  )
+  );
 }

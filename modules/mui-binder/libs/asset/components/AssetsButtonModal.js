@@ -1,8 +1,15 @@
 import {Fragment, useState} from 'react'
 import {
-  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid, InputLabel, 
-  GridList, List,
-} from '@material-ui/core'
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button,
+  Grid,
+  InputLabel,
+  ImageList,
+  List,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {AssetTile, AssetRow} from './index.js'
 
 const useStyles = makeStyles(theme=>({
@@ -37,16 +44,16 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
   }
 
   const renderCollection = (
-    <GridList cellHeight={120} spacing={6} cols={12}>
+    <ImageList cellHeight={120} spacing={6} cols={12}>
       {sourceAssets.items.map((item,i) => (
         <AssetTile key={i} item={item} onClick={()=>handleClick(item)} />
       ))}
-    </GridList>
+    </ImageList>
   )
 
   const renderUploader = sourceUploader ? sourceUploader.render : null
   const renderAction = (children && children(setOpen)) || (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
         {label && <InputLabel shrink>{label}</InputLabel>}
       </Grid>
@@ -62,15 +69,16 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
 
       <Dialog
         className={classes.root}
-        disableBackdropClick
         disableEscapeKeyDown
         fullWidth={true}
         maxWidth={false}
-        onEntering={()=>{}}
         aria-labelledby="confirmation-dialog-title"
-        open={open}>
+        open={open}
+        TransitionProps={{
+          onEntering: ()=>{}
+        }}>
         <DialogContent dividers>
-          <Grid container justify="space-between" spacing={1}>
+          <Grid container justifyContent="space-between" spacing={1}>
             <Grid item container sm={12}>
               {renderUploader && (
                 <Grid item container alignItems="center" spacing={1}>
@@ -87,5 +95,5 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
         </DialogActions>
       </Dialog>
     </Fragment>
-  )
+  );
 }

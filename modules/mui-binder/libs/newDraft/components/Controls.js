@@ -1,11 +1,11 @@
 import { Fragment, useState, useEffect } from 'react'
-import { Grid, IconButton, Select, MenuItem, FormControl } from '@material-ui/core'
+import { Grid, IconButton, Select, MenuItem, FormControl } from '@mui/material'
 import { EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
 
-import TitleIcon from '@material-ui/icons/Title'
-import FormatBoldIcon from '@material-ui/icons/FormatBold'
-import LinkIcon from '@material-ui/icons/Link'
-import ImageIcon from '@material-ui/icons/Image'
+import TitleIcon from '@mui/icons-material/Title'
+import FormatBoldIcon from '@mui/icons-material/FormatBold'
+import LinkIcon from '@mui/icons-material/Link'
+import ImageIcon from '@mui/icons-material/Image'
 
 import {useAssets, useImageUploader, AssetsButtonModal} from 'modules/mui-binder/libs/asset'
 

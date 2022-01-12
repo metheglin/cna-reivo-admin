@@ -1,10 +1,10 @@
 import React, {useState, useMemo} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
+import makeStyles from '@mui/styles/makeStyles';
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 
 const useStyles = makeStyles(theme => ({
   formControl: {

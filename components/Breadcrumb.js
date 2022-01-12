@@ -1,7 +1,8 @@
 import React from 'react'
 // import LinkNext from 'next/link'
 import Link from 'components/Link'
-import {Breadcrumbs, Typography, makeStyles} from '@material-ui/core'
+import { Breadcrumbs, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({

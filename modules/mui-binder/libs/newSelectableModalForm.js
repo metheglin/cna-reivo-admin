@@ -1,12 +1,12 @@
 import React, {useState,useEffect} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid'
-import IconButton from '@material-ui/core/IconButton';
-import InputLabel from '@material-ui/core/InputLabel'
-// import CircularProgress from '@material-ui/core/CircularProgress'
-import TableCell from '@material-ui/core/TableCell'
-import CancelIcon from '@material-ui/icons/Cancel';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import makeStyles from '@mui/styles/makeStyles';
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel'
+// import CircularProgress from '@mui/material/CircularProgress'
+import TableCell from '@mui/material/TableCell'
+import CancelIcon from '@mui/icons-material/Cancel';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import newSelectableList from './newSelectableList'
 import {ItemListTemplate} from '../newRowsPager'

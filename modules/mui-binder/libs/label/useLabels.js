@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Grid, InputAdornment} from '@material-ui/core'
+import {Grid, InputAdornment} from '@mui/material'
 import newSearchBar from '../newSearchBar'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import {normalizePath, stripLastSlash} from './index.js'

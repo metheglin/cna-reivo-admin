@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Grid, Button, CircularProgress} from '@material-ui/core'
+import {Grid, Button, CircularProgress} from '@mui/material'
 
 const renderRecursive = (objects, key) => {
   if (!objects) return null
@@ -35,7 +35,7 @@ export default function GridForm({variant, handleSave, ...props}) {
 function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, handleSave}) {
   return (
     <Grid container spacing={4}>
-      <Grid item container alignItems="flex-start" justify="space-between" spacing={2}>
+      <Grid item container alignItems="flex-start" justifyContent="space-between" spacing={2}>
         <Grid item container sm={12} md={7} spacing={2}>
           {renderRecursive(forms)}
         </Grid>
@@ -57,7 +57,7 @@ function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, h
         </Button>
       </Grid>}
     </Grid>
-  )
+  );
 }
 
 function GridFormSingle({children, forms, subforms, saving, setSaving, onSave, handleSave}) {
