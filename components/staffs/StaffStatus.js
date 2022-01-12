@@ -11,8 +11,7 @@ export function StaffStatus(props) {
   )
 }
 
-export function StaffStatusButton(props) {
-  const {subject, setSubject} = props
+export function StaffStatusButton({subject, setSubject, ...props}) {
   const {status} = subject
   const {api, enqueueSnackbar} = useSession()
   const handleActivate = () => {

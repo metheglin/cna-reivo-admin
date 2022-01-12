@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {Grid, InputAdornment} from '@material-ui/core'
 import newTextField from 'modules/mui-binder/libs/newTextField'
-import newSelectableAssets, {useImages, useModalRender} from 'modules/mui-binder/libs/newSelectableAssets'
+import {useSelector} from 'modules/mui-binder/libs/newSelectableList'
+import {useAssets, useImageUploader, AssetsSelectorModal} from 'modules/mui-binder/libs/asset'
+// import newSelectableAssets, {useImages, useModalRender} from 'modules/mui-binder/libs/newSelectableAssets'
 // import useImages from 'modules/rvadmin/core/useImages'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
@@ -26,20 +28,10 @@ export default function Form({save, prefix, subject}) {
     defaultValue: subject.serial_code, label: "Serial Code", type: 'number',
     helperText: 'Sorted from larger to smaller',
   })
-  const assetsModule = useImages({
-    baseQuery: {
-      limit: 18,
-      channel: 'label',
-    },
-    api: session.api,
-    apiUpload: session.apiRaw,
-  })
-  const image = newSelectableAssets({
-    assetsModule,
-    defaultValue: Array.of(subject.image).filter(x=>x),
-    max: 1,
-  })
-  const imageRender = useModalRender(image, {label: 'Image'})
+  const assetQuery = {channel: 'label'}
+  const sourceAssets = useAssets({baseQuery: assetQuery})
+  const sourceUploader = useImageUploader({baseQuery: assetQuery, onUploaded: sourceAssets.addItem})
+  const image = useSelector({defaultValue: Array.of(subject.image).filter(x=>x) || [], max: 1})
 
   const body = {
     path: displayPrefix ? `${displayPrefix}/${path.value}` : path.value,
@@ -51,7 +43,9 @@ export default function Form({save, prefix, subject}) {
   return (
     <GridForm 
       forms={[path, name, serial_code,]}
-      subforms={[imageRender]}
+      subforms={[
+        <AssetsSelectorModal selector={image} sourceAssets={sourceAssets} sourceUploader={sourceUploader} label="Image" />
+      ]}
       handleSave={()=>save(body)} />
   )
 }
