@@ -9,22 +9,28 @@ import {QueryClient, QueryClientProvider} from 'react-query'
 const queryClient = new QueryClient()
 import i18n from 'modules/i18n'
 
+import {resolveDynamicRoute} from 'modules/next-ext/ext'
+
 function MyApp(props) {
   const {pageProps, router, Component} = props
   const [status, setStatus] = useState()
 
   useEffect(async () => {
-    // console.log('out router.route', router.route)
+    // console.log('out router.route', router.route, router.asPath)
     const pages = await router.pageLoader.getPageList()
     // console.log('pages', pages)
-    const parsed = router._resolveHref({pathname: router.asPath}, pages)
-    // console.log('parsed', parsed)
+    // const parsed = router.resolveDynamicRoute({pathname: router.asPath}, pages)
+    // const parsed = parseRelativeUrl(router.asPath)
+    const parsedPathname = resolveDynamicRoute({pathname: router.asPath, pages})
+    // console.log('parsed', parsedPathname)
     if (typeof window !== 'undefined') {
-      router.fetchComponent(parsed.pathname).then(res=>{
+      router.fetchComponent(parsedPathname).then(res=>{
         // console.log('fetch success', res)
-        router.replace(router.asPath)
+        // console.log('router asPath', router.asPath)
+        router.replace(window.location.href)
         setStatus('ok')
       }).catch(err=>{
+        // console.log('err:', err)
         setStatus('error')
       })
     }
@@ -70,3 +76,4 @@ function MyAppNotFound() {
     </ThemeProvider>
   )
 }
+
