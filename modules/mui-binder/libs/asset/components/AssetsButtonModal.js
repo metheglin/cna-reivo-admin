@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useState, forwardRef, useImperativeHandle} from 'react'
 import {
   Dialog,
   DialogContent,
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme=>({
 // return (
 //   <AssetsButtonModal label="Asset" sourceAssets={sourceAssets} sourceUploader={sourceUploader} onClick={()=>{}} />
 // )
-export default function AssetsButtonModal({sourceAssets, sourceUploader, label, onClick, children}) {
+const AssetsButtonModal = forwardRef(({sourceAssets, sourceUploader, label, onClick, actionComponent}, ref) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const handleClick = (item) => {
@@ -52,7 +52,7 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
   )
 
   const renderUploader = sourceUploader ? sourceUploader.render : null
-  const renderAction = (children && children(setOpen)) || (
+  const renderAction = actionComponent || (
     <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
         {label && <InputLabel shrink>{label}</InputLabel>}
@@ -62,6 +62,11 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
       </Grid>
     </Grid>
   )
+
+  useImperativeHandle(ref, ()=>({
+    get open() {return open},
+    setOpen(x) {return setOpen(x)}
+  }))
 
   return (
     <Fragment>
@@ -95,5 +100,6 @@ export default function AssetsButtonModal({sourceAssets, sourceUploader, label, 
         </DialogActions>
       </Dialog>
     </Fragment>
-  );
-}
+  )
+})
+export default AssetsButtonModal

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react'
-import {CircularProgress} from '@material-ui/core';
+import {CircularProgress} from '@mui/material';
 import Link from 'components/Link'
 import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 import {useRouter} from 'next/router'

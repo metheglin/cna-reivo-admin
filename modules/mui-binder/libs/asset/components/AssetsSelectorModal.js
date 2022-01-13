@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useState, forwardRef, useImperativeHandle} from 'react'
 import {
   Dialog,
   DialogContent,
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme=>({
 // return (
 //   <AssetsSelectorModal label="Asset" selector={images} sourceAssets={sourceAssets} sourceUploader={sourceUploader} />
 // )
-export default function AssetsSelectorModal({selector, sourceAssets, sourceUploader, label}) {
+const AssetsSelectorModal = forwardRef(({selector, sourceAssets, sourceUploader, label}, ref) => {
   const classes = useStyles()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
@@ -62,6 +62,11 @@ export default function AssetsSelectorModal({selector, sourceAssets, sourceUploa
   )
 
   const renderUploader = sourceUploader ? sourceUploader.render : null
+
+  useImperativeHandle(ref, ()=>({
+    get open() {return open},
+    setOpen(x) {return setOpen(x)}
+  }))
 
   return (
     <Fragment>
@@ -108,4 +113,5 @@ export default function AssetsSelectorModal({selector, sourceAssets, sourceUploa
       </Dialog>
     </Fragment>
   );
-}
+})
+export default AssetsSelectorModal

@@ -1,11 +1,12 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useState, forwardRef, useImperativeHandle} from 'react'
 import {
-  makeStyles, Dialog, DialogContent, DialogActions, Button, Grid, InputLabel, 
+  Dialog, DialogContent, DialogActions, Button, Grid, InputLabel, 
   GridList, List,
-} from '@material-ui/core'
+} from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
 import { {{pascalCase name}}Row } from './{{pascalCase name}}Row'
 import Link from 'next/link'
-import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@mui/icons/Add'
 
 const useStyles = makeStyles(theme=>({
   grow: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme=>({
 // const {{namePlural}} = useSelector({defaultValue: subject.{{namePlural}} || [], max: 20,})
 // 
 // return <{{pascalCase namePlural}}SelectorModal selector={ {{namePlural}} } sources={sources} label="{{titleCase namePlural}}" />
-export default function {{pascalCase namePlural}}SelectorModal({selector, sources, label}) {
+const {{pascalCase namePlural}}SelectorModal = forwardRef(({selector, sources, label}, ref) => {
   const classes = useStyles()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
@@ -64,6 +65,11 @@ export default function {{pascalCase namePlural}}SelectorModal({selector, source
       </Grid>*/}
     </Grid>
   )
+
+  useImperativeHandle(ref, ()=>({
+    get open() {return open},
+    setOpen(x) {return setOpen(x)}
+  }))
 
   return (
     <Fragment>
@@ -108,4 +114,6 @@ export default function {{pascalCase namePlural}}SelectorModal({selector, source
       </Dialog>
     </Fragment>
   )
-}
+})
+
+export default {{pascalCase namePlural}}SelectorModal

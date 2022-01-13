@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useState, forwardRef, useImperativeHandle} from 'react'
 import {
   Dialog,
   DialogContent,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme=>({
 // const categories = useSelector({defaultValue: subject.labels || [], max: 20,})
 // 
 // return <LabelsSelectorModal selector={categories} sourceLabels={sourceCategories} label="Category" />
-export default function LabelsSelectorModal({selector, sourceLabels, label}) {
+const LabelsSelectorModal = forwardRef(({selector, sourceLabels, label}, ref) => {
   const classes = useStyles()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
@@ -71,6 +71,11 @@ export default function LabelsSelectorModal({selector, sourceLabels, label}) {
       </Grid>
     </Grid>
   )
+
+  useImperativeHandle(ref, ()=>({
+    get open() {return open},
+    setOpen(x) {return setOpen(x)}
+  }))
 
   return (
     <Fragment>
@@ -115,5 +120,7 @@ export default function LabelsSelectorModal({selector, sourceLabels, label}) {
         </DialogActions>
       </Dialog>
     </Fragment>
-  );
-}
+  )
+})
+
+export default LabelsSelectorModal
