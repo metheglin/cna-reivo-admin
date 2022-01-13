@@ -35,7 +35,7 @@ const Page = () => {
 
   const pager = newRowsPager({
     tableProps: {size: 'medium'},
-    headers: ['Slug', 'Title', 'Created', 'Status', 'Action'],
+    headers: ['Slug', 'Title', 'Created', 'Status'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
       return session.api.fetch(`{{apiPrefix}}`, {params: {...baseQuery, offset, limit}}).then(response=>{
         updateRows(response.data, response.total)
@@ -51,9 +51,6 @@ const Page = () => {
         <TableCell>{row.title}</TableCell>
         <TableCell>{formatDistance(new Date(row.created_at), new Date())} ago</TableCell>
         <TableCell><PublishStatus {...row} /></TableCell>
-        <TableCell>
-          <PublishButton subject={row} disabled={true} />
-        </TableCell>
       </React.Fragment>
     )
   })

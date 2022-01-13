@@ -5,7 +5,7 @@ export function Timestamp({prefix, datetime}) {
   if (!datetime) return null
   const label = [prefix, formatDistance(new Date(datetime), new Date(), {addSuffix: true})].filter(x=>x).join(' ')
   return (
-    <Tooltip interactive title={format(new Date(datetime), "yyyy-MM-dd HH:mm:ssxxx")}>
+    <Tooltip title={format(new Date(datetime), "yyyy-MM-dd HH:mm:ssxxx")}>
       <Chip size="small" variant="outlined" label={label} />
     </Tooltip>
   )

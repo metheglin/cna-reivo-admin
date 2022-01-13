@@ -35,7 +35,7 @@ export default function PublishStatus({start_at, end_at, status}) {
   const [label, color, info] = checkPublishStatus({start_at, end_at, status})
   const StatusComponent = (<Chip size="small" variant="outlined" label={label} color={color} />)
   if (info) {
-    return (<Tooltip interactive title={info}>{StatusComponent}</Tooltip>)
+    return (<Tooltip title={info}>{StatusComponent}</Tooltip>)
   } else {
     return StatusComponent
   }
