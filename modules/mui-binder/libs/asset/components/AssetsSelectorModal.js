@@ -56,7 +56,7 @@ const AssetsSelectorModal = forwardRef(({selector, sourceAssets, sourceUploader,
   )
 
   const renderCollection = (
-    <ImageList cellHeight={120} spacing={6} cols={12}>
+    <ImageList spacing={6} cols={12}>
       {sourceAssets.items.map((item,i) => (<AssetTile key={i} {...getItemProps(item)} />))}
     </ImageList>
   )

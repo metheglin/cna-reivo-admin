@@ -4,10 +4,7 @@ import {
   StyledEngineProvider,
   createTheme,
   colors,
-  adaptV4Theme,
-} from '@mui/material';
-import shadows from './shadows'
-import typography from './typography'
+} from '@mui/material'
 import darkScrollbar from './darkScrollbar'
 
 const ThemeContext = createContext({})
@@ -23,33 +20,10 @@ function setCookie(value) {
 }
 
 const lightPalette = {
-  background: {
-    dark: '#F4F6F8',
-    default: colors.common.white,
-    paper: colors.common.white
-  },
-  primary: {
-    main: colors.blue[500]
-  },
-  secondary: {
-    main: colors.red[500]
-  },
-  error: {
-    main: '#e82856',
-  },
   type: 'light',
   mode: 'light',
 }
 const darkPalette = {
-  primary: {
-    main: colors.blue[200]
-  },
-  secondary: {
-    main: colors.red[200]
-  },
-  error: {
-    main: '#f83161',
-  },
   type: 'dark',
   mode: 'dark',
 }
@@ -62,7 +36,7 @@ export function ThemeProvider({children}) {
   }, [paletteType])
 
   const theme = useMemo(()=>{
-    const nextTheme = createTheme(adaptV4Theme({
+    const nextTheme = createTheme({
       nprogress: {
         color: paletteType === 'light' ? '#000' : '#fff',
       },
@@ -73,20 +47,15 @@ export function ThemeProvider({children}) {
           paddingLeft: 16,
           paddingRight: 16,
         }
-      }
-    }, {
+      },
       components: {
         MuiCssBaseline: {
           styleOverrides: {
             body: paletteType === 'dark' ? darkScrollbar() : null,
           },
         },
-      },
-    }, shadows, typography))
-    nextTheme.palette.background.level2 =
-      paletteType === 'light' ? nextTheme.palette.grey[100] : '#424242'
-    nextTheme.palette.background.level1 =
-      paletteType === 'light' ? '#F4F6F8' : '#333'
+      }
+    })
     return nextTheme
   }, [paletteType])
 

@@ -3,7 +3,6 @@ import FlashProvider from 'modules/rvadmin/core/FlashProvider'
 import SessionProvider from 'modules/rvadmin/core/SessionProvider'
 import {ThemeProvider} from '@themes/default'
 import {CssBaseline} from '@mui/material'
-import GlobalStyles from 'themes/default/GlobalStyles'
 import {ErrorLayout} from 'components/layouts'
 import {QueryClient, QueryClientProvider} from 'react-query'
 const queryClient = new QueryClient()
@@ -51,7 +50,6 @@ function MyAppInner({Component, pageProps, router}) {
   return (
     <ThemeProvider>
       <CssBaseline />
-      <GlobalStyles />
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       <QueryClientProvider client={queryClient}>
         <FlashProvider>
@@ -68,7 +66,6 @@ function MyAppNotFound() {
   return (
     <ThemeProvider>
       <CssBaseline />
-      <GlobalStyles />
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       <ErrorLayout title="アクセスできません">
         ページが見つかりません

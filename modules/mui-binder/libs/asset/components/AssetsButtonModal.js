@@ -44,7 +44,7 @@ const AssetsButtonModal = forwardRef(({sourceAssets, sourceUploader, label, onCl
   }
 
   const renderCollection = (
-    <ImageList cellHeight={120} spacing={6} cols={12}>
+    <ImageList spacing={6} cols={12}>
       {sourceAssets.items.map((item,i) => (
         <AssetTile key={i} item={item} onClick={()=>handleClick(item)} />
       ))}
