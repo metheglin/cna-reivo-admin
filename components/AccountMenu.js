@@ -40,6 +40,9 @@ export default function AccountMenu() {
           />
         </MenuItem>
         <MenuItem>{email}</MenuItem>
+        <MenuItem onClick={()=>router.push('/my/profile')}>
+          <PersonIcon style={{paddingRight: 6}} /> プロフィール
+        </MenuItem>
         <MenuItem onClick={()=>router.push('/att/permissions')}>
           <SwapHorizIcon style={{paddingRight: 6}} /> アカウントを変更
         </MenuItem>
