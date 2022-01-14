@@ -8,6 +8,7 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import {useTranslation} from 'react-i18next'
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -15,6 +16,7 @@ export default function AccountMenu() {
   const session = useSession()
   const {email} = session.payload
   const {paletteType, setPaletteType} = useTheme()
+  const {t} = useTranslation()
 
   return (
     <React.Fragment>
@@ -41,13 +43,13 @@ export default function AccountMenu() {
         </MenuItem>
         <MenuItem>{email}</MenuItem>
         <MenuItem onClick={()=>router.push('/my/profile')}>
-          <PersonIcon style={{paddingRight: 6}} /> プロフィール
+          <PersonIcon style={{paddingRight: 6}} /> {t('Profile')}
         </MenuItem>
         <MenuItem onClick={()=>router.push('/att/permissions')}>
-          <SwapHorizIcon style={{paddingRight: 6}} /> アカウントを変更
+          <SwapHorizIcon style={{paddingRight: 6}} /> {t('Change Account')}
         </MenuItem>
         <MenuItem onClick={()=>session.logout()}>
-          <ExitToAppIcon style={{paddingRight: 6}} /> ログアウト
+          <ExitToAppIcon style={{paddingRight: 6}} /> {t('Logout')}
         </MenuItem>
       </Menu>
     </React.Fragment>
