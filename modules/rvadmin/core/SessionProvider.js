@@ -72,6 +72,9 @@ export default function SessionProvider({children}) {
         get apiRaw() {
           return Api.raw({token: AccessToken.token, handleApiError})
         },
+        get isAuthorized() {
+          return !!(AccessToken.token && AccessToken.data && AccessToken.data.permission)
+        },
         enqueueSnackbar, enqueuePermanentError,
       }}>
       {component}
