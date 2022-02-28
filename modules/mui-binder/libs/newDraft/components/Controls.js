@@ -40,6 +40,7 @@ export function ControlSelectFormat({editorState, setEditorState}) {
       <Select
         value={format}
         onChange={handleChange}
+        variant="standard"
       >
         <MenuItem value={'unstyled'}>unstyled</MenuItem>
         <MenuItem value={'header-two'}>header-two</MenuItem>
@@ -89,9 +90,8 @@ export function ControlButtonImage({editorState, setEditorState, channel}) {
 
   return (
     <Fragment>
-      <AssetsButtonModal sourceAssets={sourceAssets} sourceUploader={sourceUploader} onClick={handleClick}>
-        {setOpen => <ControlButton active={false} onClick={()=>setOpen(true)}><ImageIcon /></ControlButton>}
-      </AssetsButtonModal>
+      <AssetsButtonModal sourceAssets={sourceAssets} sourceUploader={sourceUploader} onClick={handleClick}
+        actionComponent={<ControlButton active={false} onClick={()=>setOpen(true)}><ImageIcon /></ControlButton>} />
     </Fragment>
   )
 }

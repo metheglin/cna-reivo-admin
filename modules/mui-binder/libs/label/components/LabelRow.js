@@ -5,7 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 const useStyles = makeStyles(theme => ({
   selected: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
   }
 }))
 

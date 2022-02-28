@@ -32,7 +32,7 @@ const PageInner = ({prefix}) => {
   const pager = newRowsPager({
     // defaultLimit: 4,
     tableProps: {size: 'medium'},
-    headers: ['Path', 'Name', 'Serial Code', 'Status', 'Action'],
+    headers: ['Path', 'Name', 'Serial Code', 'Status'],
     onPage: ({offset, limit, baseQuery, updateRows}) => {
       return session.api.fetch(`/labels`, {params: {...baseQuery, offset, limit}}).then(response=>{
         updateRows(response.data, response.total)
@@ -48,15 +48,6 @@ const PageInner = ({prefix}) => {
         <TableCell>{row.name}</TableCell>
         <TableCell><Chip size="small" label={row.serial_code} /></TableCell>
         <TableCell><Chip size="small" label={row.status} /></TableCell>
-        <TableCell>
-          <Button disabled={true}>PUBLISH</Button>
-          {/*<ButtonResourceStatus
-            apiPrefix="/labels"
-            resource={row}
-            updateRowById={updateRowById}
-            disabled={true}
-          />*/}
-        </TableCell>
       </React.Fragment>
     )
   })

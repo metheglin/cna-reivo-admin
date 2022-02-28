@@ -58,13 +58,13 @@ function DefaultFile({}) {
 
 const useStyles = makeStyles(theme => ({
   selected: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
     '& .MuiAvatar-root': {
       opacity: 0.7,
     }
   },
   tileSelected: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
     '& .MuiGridListTile-tile': {
       opacity: 0.8,
     }
