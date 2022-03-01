@@ -91,7 +91,7 @@ export function ControlButtonImage({editorState, setEditorState, channel}) {
   return (
     <Fragment>
       <AssetsButtonModal sourceAssets={sourceAssets} sourceUploader={sourceUploader} onClick={handleClick}
-        actionComponent={<ControlButton active={false} onClick={()=>setOpen(true)}><ImageIcon /></ControlButton>} />
+        actionComponent={(setOpen)=><ControlButton active={false} onClick={()=>setOpen(true)}><ImageIcon /></ControlButton>} />
     </Fragment>
   )
 }
