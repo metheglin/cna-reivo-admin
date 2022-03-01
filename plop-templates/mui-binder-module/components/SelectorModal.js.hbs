@@ -7,6 +7,7 @@ import makeStyles from '@mui/styles/makeStyles'
 import { {{pascalCase name}}Row } from './{{pascalCase name}}Row'
 import Link from 'next/link'
 import AddIcon from '@mui/icons/Add'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(theme=>({
   grow: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme=>({
 // return <{{pascalCase namePlural}}SelectorModal selector={ {{namePlural}} } sources={sources} label="{{titleCase namePlural}}" />
 const {{pascalCase namePlural}}SelectorModal = forwardRef(({selector, sources, label}, ref) => {
   const classes = useStyles()
+  const {t} = useTranslation()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
 

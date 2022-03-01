@@ -12,6 +12,7 @@ import PublishStatus from 'components/PublishStatus'
 import PublishButton from 'components/PublishButton'
 import {MainDashBar} from 'components{{pathPrefix}}'
 import {formatDistance} from 'date-fns'
+import {CreatedAt} from 'components/Timestamps'
 
 // NOTE: Comment-in to enable search
 // import {TextField} from '@material-ui/core'
@@ -49,7 +50,7 @@ const Page = () => {
           </Link>
         </TableCell>
         <TableCell>{row.title}</TableCell>
-        <TableCell>{formatDistance(new Date(row.created_at), new Date())} ago</TableCell>
+        <TableCell><CreatedAt {...row} /></TableCell>
         <TableCell><PublishStatus {...row} /></TableCell>
       </React.Fragment>
     )

@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Tooltip} from '@mui/material'
 import CachedIcon from '@mui/icons-material/Cached'
 import RestoreIcon from '@mui/icons-material/Restore'
+import {useTranslation} from 'react-i18next'
 
 export default function Component({subject, onOpen, onDraft, ...props}) {
   const {status} = subject
@@ -13,26 +14,32 @@ export default function Component({subject, onOpen, onDraft, ...props}) {
   )
 }
 
-export const ButtonOpen = props => (
-  <Tooltip title="Open now" arrow>
-    <Button {...props}
-      variant="contained"
-      color="primary"
-      size="small"
-      startIcon={<CachedIcon />}>
-      open
-    </Button>
-  </Tooltip>
-)
+export const ButtonOpen = props => {
+  const {t} = useTranslation()
+  return (
+    <Tooltip title={t("It will be opened for end-user by clicking here")} arrow>
+      <Button {...props}
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<CachedIcon />}>
+        {t('Open Now')}
+      </Button>
+    </Tooltip>
+  )
+}
 
-export const ButtonDraft = props => (
-  <Tooltip title="Make draft now" arrow>
-    <Button {...props}
-      variant="contained"
-      color="secondary"
-      size="small"
-      startIcon={<RestoreIcon />}>
-      draft
-    </Button>
-  </Tooltip>
-)
+export const ButtonDraft = props => {
+  const {t} = useTranslation()
+  return (
+    <Tooltip title={t("It will be drafted and closed for end-user by clicking here")} arrow>
+      <Button {...props}
+        variant="contained"
+        color="secondary"
+        size="small"
+        startIcon={<RestoreIcon />}>
+        {t('Draft Now')}
+      </Button>
+    </Tooltip>
+  )
+}

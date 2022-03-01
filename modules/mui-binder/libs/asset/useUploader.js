@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import { makeStyles } from '@material-ui/core/styles'
+import {useTranslation} from 'react-i18next'
 
 const buildUploadFormData = (file, params={}) => {
   return new Promise((resolve)=>{
@@ -62,12 +63,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export function Uploader({onDrop, message}) {
+  const {t} = useTranslation()
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   const classes = useStyles({isDragActive})
   const renderMessage = () => {
     if (message) return message
-    if (isDragActive) return (<p>Drag and drop files here</p>)
-    return (<p>Drag and drop files here</p>)
+    if (isDragActive) return (<p>{t('Drag and drop files here')}</p>)
+    return (<p>{t('Drag and drop files here')}</p>)
   }
   
   return (

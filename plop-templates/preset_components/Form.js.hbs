@@ -9,9 +9,11 @@ import {Grid, InputAdornment} from '@mui/material'
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 
 export default function Form({save, subject}) {
   subject = subject || {}
+  const {t} = useTranslation()
   const session = useSession()
   
   // const publishRange = newDateTimeRange({
@@ -20,10 +22,10 @@ export default function Form({save, subject}) {
   // })
   // const slug = newTextField({
   //   defaultValue: subject.slug || "", 
-  //   label: "Slug", required: true,
+  //   label: t("Slug"), required: true,
   //   fullWidth: true, disabled: !!subject.slug,
   // })
-  // const title = newTextField({defaultValue: subject.title || "", label: "Title", required: true, fullWidth: true})
+  // const title = newTextField({defaultValue: subject.title || "", label: t("Title"), required: true, fullWidth: true})
 
   // const assetQuery = {channel: '{{pluralize.singular name}}'}
   // const sourceAssets = useAssets({baseQuery: assetQuery})
@@ -54,8 +56,8 @@ export default function Form({save, subject}) {
         /* publishRange, slug, title, content, */
       ]}
       subforms={[
-        // (<AssetsSelectorModal selector={images} sourceAssets={sourceAssets} sourceUploader={sourceUploader} label="Image" />),
-        // (<LabelsSelectorModal selector={categories} sourceLabels={sourceCategories} label="Category" />),
+        // (<AssetsSelectorModal selector={images} sourceAssets={sourceAssets} sourceUploader={sourceUploader} label={t("Image")} />),
+        // (<LabelsSelectorModal selector={categories} sourceLabels={sourceCategories} label={t("Category")} />),
       ]}
       handleSave={()=>save(body)} />
   )

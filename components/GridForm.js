@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Grid, Button, CircularProgress} from '@mui/material'
+import {useTranslation} from 'react-i18next'
 
 const renderRecursive = (objects, key) => {
   if (!objects) return null
@@ -33,6 +34,7 @@ export default function GridForm({variant, handleSave, ...props}) {
 }
 
 function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, handleSave}) {
+  const {t} = useTranslation()
   return (
     <Grid container spacing={4}>
       <Grid item container alignItems="flex-start" justifyContent="space-between" spacing={2}>
@@ -53,7 +55,7 @@ function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, h
           size="large"
           onClick={onSave}
           disabled={saving}>
-          {saving ? <CircularProgress size={20} /> : "Save"}
+          {saving ? <CircularProgress size={20} /> : t("Save")}
         </Button>
       </Grid>}
     </Grid>
@@ -61,6 +63,7 @@ function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, h
 }
 
 function GridFormSingle({children, forms, subforms, saving, setSaving, onSave, handleSave}) {
+  const {t} = useTranslation()
   return (
     <Grid container spacing={4}>
       <Grid item container spacing={2}>
@@ -79,7 +82,7 @@ function GridFormSingle({children, forms, subforms, saving, setSaving, onSave, h
           size="large"
           onClick={onSave}
           disabled={saving}>
-          {saving ? <CircularProgress size={20} /> : "Save"}
+          {saving ? <CircularProgress size={20} /> : t("Save")}
         </Button>
       </Grid>}
     </Grid>

@@ -2,10 +2,43 @@ const ja = {
   "Don\'t have a staff account?": "アカウントをおもちでない方はシステム管理者へお問い合わせください。",
   "Don\'t have a party account?": "アカウントが表示されない場合は、<1>ログアウト</1>のうえ再度ログインをお試しください。",
   "You\'re logging in with": "<1>{{email}}</1>でログイン中",
-  // 
+  "Dark mode": "ダークモード",
+  "Profile": "プロフィール",
+  "Change Account": "アカウント変更",
+  "Logout": "ログアウト",
+  // Resources
   "Labels": "ラベル",
-  // 
+  "Staffs": "スタッフ",
+  // Properties
+  "Title": "タイトル",
+  "Created": "作成",
+  "Updated": "更新",
+  "Start At": "公開開始",
+  "End At": "公開終了",
+  "Status": "ステータス",
+  "Image": "画像",
+  "Category": "カテゴリ",
+  "Tag": "タグ",
+  "Path": "パス",
+  "Name": "名前",
   "Serial Code": "並び替えコード",
+  "Email": "メールアドレス",
+  "Password": "パスワード",
+  "Password Confirmation": "パスワード確認用",
+  "Permission": "権限",
+  // Actions
+  "New": "新規",
+  "Save": "保存",
+  "Open Now": "オープンする",
+  "Draft Now": "下書きにする",
+  "Activate": "アクティブにする",
+  "Inactivate": "非アクティブにする",
+  "Modify": "変更",
+  "Add More": "追加",
+  // Description
   "Sorted from larger to smaller": "数値が高い順に並んで表示されます",
+  "It will be opened for end-user by clicking here": "クリックするとユーザに公開可能な状態になります",
+  "It will be drafted and closed for end-user by clicking here": "クリックすると下書き状態になり、非公開となります",
+  "Drag and drop files here": "ドラッグドロップで追加できます",
 }
 export default ja

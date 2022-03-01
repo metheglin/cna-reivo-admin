@@ -38,7 +38,7 @@ export default function AccountMenu() {
                 color="primary"
               />
             }
-            label="Dark mode"
+            label={t("Dark mode")}
           />
         </MenuItem>
         <MenuItem>{email}</MenuItem>

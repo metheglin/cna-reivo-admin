@@ -1,6 +1,7 @@
 import {Chip, Button, Tooltip} from '@mui/material'
 import CachedIcon from '@mui/icons-material/Cached'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 // import {staffStatus, staffAction} from 'constants/status'
 
 export function StaffStatus(props) {
@@ -13,6 +14,7 @@ export function StaffStatus(props) {
 
 export function StaffStatusButton({subject, setSubject, ...props}) {
   const {status} = subject
+  const {t} = useTranslation()
   const {api, enqueueSnackbar} = useSession()
   const handleActivate = () => {
     api.fetch(`/staffs/${subject.id}/activate`, {method: "PATCH"}).then(res=>{
@@ -27,17 +29,17 @@ export function StaffStatusButton({subject, setSubject, ...props}) {
     })
   }
 
-  const type = status === 'active' ? 'inactivate' : 'activate'
-  const onClick = type === 'activate' ? handleActivate : handleInactivate
+  const type = status === 'active' ? 'Inactivate' : 'Activate'
+  const onClick = status === 'active' ? handleInactivate : handleActivate
   return (
     <Tooltip title={`${type} now`} arrow>
       <Button {...props}
         variant="contained"
-        color={type === 'activate' ? "primary" : "secondary"}
+        color={status === 'active' ? "secondary" : "primary"}
         size="small"
         onClick={onClick}
         startIcon={<CachedIcon />}>
-        {type}
+        {t(type)}
       </Button>
     </Tooltip>
   )

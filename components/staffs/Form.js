@@ -5,33 +5,35 @@ import newSelectablePermissions from 'modules/mui-binder/libs/newSelectablePermi
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 
 export default function Form({save, subject}) {
   subject = subject || {}
+  const {t} = useTranslation()
   const session = useSession()
   
   const name = newTextField({
     defaultValue: subject.name || "", 
-    label: "氏名 Name",
+    label: t("Name"),
     required: true,
     fullWidth: true,
   })
   const email = newTextField({
     defaultValue: subject.email || "", 
-    label: "メールアドレス Email",
+    label: t("Email"),
     required: true,
     fullWidth: true, disabled: !!subject.email,
   })
   const password = newTextField({
     defaultValue: subject.password || "", 
-    label: "パスワード Password",
+    label: t("Password"),
     required: true,
     fullWidth: true, disabled: !!subject.id,
     type: "password"
   })
   const password_confirmation = newTextField({
     defaultValue: subject.password_confirmation || "", 
-    label: "確認用パスワード Password Confirmation",
+    label: t("Password Confirmation"),
     required: true,
     fullWidth: true, disabled: !!subject.id,
     type: "password"
@@ -39,7 +41,7 @@ export default function Form({save, subject}) {
 
   const permissions = newSelectablePermissions({
     defaultValue: subject.permissions || [],
-    label: "権限 Permission",
+    label: t("Permission"),
     permissions: [
       // {identifier: 'master', ability_kind: 'master', client: null},
       {identifier: 'admin', ability_kind: 'admin'},

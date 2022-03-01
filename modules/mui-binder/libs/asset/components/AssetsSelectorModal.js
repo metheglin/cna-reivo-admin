@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import {AssetTile, AssetRow} from './index.js'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(theme=>({
   grow: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles(theme=>({
 // )
 const AssetsSelectorModal = forwardRef(({selector, sourceAssets, sourceUploader, label}, ref) => {
   const classes = useStyles()
+  const {t} = useTranslation()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
 
@@ -75,7 +77,7 @@ const AssetsSelectorModal = forwardRef(({selector, sourceAssets, sourceUploader,
           {label && <InputLabel shrink>{label}</InputLabel>}
         </Grid>
         <Grid item>
-          <Button size="small" onClick={()=>setOpen(true)} color="primary">Modify</Button>
+          <Button size="small" onClick={()=>setOpen(true)} color="primary">{t('Modify')}</Button>
         </Grid>
       </Grid>
       

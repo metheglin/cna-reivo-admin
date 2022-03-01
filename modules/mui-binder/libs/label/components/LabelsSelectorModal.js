@@ -13,6 +13,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import {LabelRow} from './LabelRow'
 import Link from 'next/link'
 import AddIcon from '@mui/icons-material/Add'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(theme=>({
   grow: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles(theme=>({
 // return <LabelsSelectorModal selector={categories} sourceLabels={sourceCategories} label="Category" />
 const LabelsSelectorModal = forwardRef(({selector, sourceLabels, label}, ref) => {
   const classes = useStyles()
+  const {t} = useTranslation()
   const {values, onRemove, onPush, isSelected} = selector
   const [open, setOpen] = useState(false)
 
@@ -65,7 +67,7 @@ const LabelsSelectorModal = forwardRef(({selector, sourceLabels, label}, ref) =>
           <Button size="small"
             className={classes.button}
             startIcon={<AddIcon />}>
-            Add More
+            {t('Add More')}
           </Button>
         </Link>
       </Grid>
@@ -84,7 +86,7 @@ const LabelsSelectorModal = forwardRef(({selector, sourceLabels, label}, ref) =>
           {label && <InputLabel shrink>{label}</InputLabel>}
         </Grid>
         <Grid item>
-          <Button size="small" onClick={()=>setOpen(true)} color="primary">Modify</Button>
+          <Button size="small" onClick={()=>setOpen(true)} color="primary">{t('Modify')}</Button>
         </Grid>
       </Grid>
       

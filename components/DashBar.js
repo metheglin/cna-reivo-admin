@@ -3,15 +3,17 @@ import { Typography, Toolbar, Tooltip, IconButton, Icon, Divider } from '@mui/ma
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from 'next/router'
 import Breadcrumb from 'components/Breadcrumb'
+import {useTranslation} from 'react-i18next'
 
 const renderIconLink = ({title, url, icon, ...props}) => {
   const router = useRouter()
+  const {t} = useTranslation()
   const button = (
     <IconButton size="small" onClick={()=>router.push(url)}>
       <Icon {...props}>{icon}</Icon>
     </IconButton>
   )
-  return title ? (<Tooltip title={title}>{button}</Tooltip>) : button
+  return title ? (<Tooltip title={t(title)}>{button}</Tooltip>) : button
 }
 
 const useStyles = makeStyles(theme =>({

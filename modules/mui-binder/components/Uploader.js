@@ -1,6 +1,7 @@
 import React from 'react'
 import {useDropzone} from 'react-dropzone'
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from '@mui/styles/makeStyles'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
   dashedArea: {
@@ -27,12 +28,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Uploader({onDrop, message}) {
+  const {t} = useTranslation()
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   const classes = useStyles({isDragActive})
   const renderMessage = () => {
     if (message) return message
-    if (isDragActive) return (<p>Drag and drop files here</p>)
-    return (<p>Drag and drop files here</p>)
+    if (isDragActive) return (<p>{t('Drag and drop files here')}</p>)
+    return (<p>{t('Drag and drop files here')}</p>)
   }
   
   return (

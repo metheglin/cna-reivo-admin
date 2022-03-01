@@ -8,24 +8,26 @@ import {useAssets, useImageUploader, AssetsSelectorModal} from 'modules/mui-bind
 import HelpTip from 'components/HelpTip'
 import GridForm from 'components/GridForm'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 
 import newDateTimeRange from 'modules/mui-binder/libs/newDateTimeRange'
 
 export default function Form({save, prefix, subject}) {
   subject = subject || {}
+  const {t} = useTranslation()
   const session = useSession()
   const displayPrefix = prefix ?
     "/" + prefix.split('/').filter(x=>x).concat([""]).join('/') :
     ""
   const path = newTextField({
     defaultValue: subject.path || "", 
-    label: "Path", required: true,
+    label: t("Path"), required: true,
     fullWidth: true, disabled: !!subject.path,
     InputProps: {
       startAdornment: <InputAdornment position="start">{displayPrefix}</InputAdornment>
     }
   })
-  const name = newTextField({defaultValue: subject.name || "", label: "Name", required: true, fullWidth: true})
+  const name = newTextField({defaultValue: subject.name || "", label: t("Name"), required: true, fullWidth: true})
   const serial_code = newTextField({
     defaultValue: subject.serial_code, label: "Serial Code", type: 'number',
     helperText: 'Sorted from larger to smaller',
@@ -46,7 +48,7 @@ export default function Form({save, prefix, subject}) {
     <GridForm 
       forms={[path, name, serial_code,]}
       subforms={[
-        <AssetsSelectorModal selector={image} sourceAssets={sourceAssets} sourceUploader={sourceUploader} label="Image" />
+        <AssetsSelectorModal selector={image} sourceAssets={sourceAssets} sourceUploader={sourceUploader} label={t('Image')} />
       ]}
       handleSave={()=>save(body)} />
   )
