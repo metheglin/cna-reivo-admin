@@ -10,6 +10,7 @@ module.exports = plop => {
   // https://handlebarsjs.com/guide/expressions.html#helpers
   plop.setHelper('scopeCase', scopeCase);
   plop.setHelper('urlCase', urlCase);
+  plop.setHelper('singular', pluralize.singular);
 
   // EXAMPLE: yarn run plop pages blog
   plop.setGenerator('pages', {
