@@ -42,7 +42,7 @@ export default function withModalPicker(editorProps, {sourceAssets, sourceUpload
       {editor.render}
       <AssetsButtonModal ref={assetsRef} label="Image" 
         sourceAssets={sourceAssets} sourceUploader={sourceUploader} 
-        actionComponent={<Fragment></Fragment>}
+        actionComponent={(setOpen)=><Fragment></Fragment>}
         onClick={(asset)=>{
           console.log(asset)
           imgPicker && imgPicker.callback(asset.publish_url)

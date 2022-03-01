@@ -52,7 +52,7 @@ const AssetsButtonModal = forwardRef(({sourceAssets, sourceUploader, label, onCl
   )
 
   const renderUploader = sourceUploader ? sourceUploader.render : null
-  const renderAction = actionComponent(setOpen) || (
+  const renderAction = (actionComponent && actionComponent(setOpen)) || (
     <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
         {label && <InputLabel shrink>{label}</InputLabel>}
