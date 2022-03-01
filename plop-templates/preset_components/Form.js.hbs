@@ -30,7 +30,7 @@ export default function Form({save, subject}) {
   // const assetQuery = {channel: '{{singular name}}'}
   // const sourceAssets = useAssets({baseQuery: assetQuery})
   // const sourceUploader = useImageUploader({baseQuery: assetQuery, onUploaded: sourceAssets.addItem})
-  // const images = useSelector({defaultValue: Array.of(subject.images).filter(x=>x) || [], max: 5})
+  // const images = useSelector({defaultValue: (subject.images || []).filter(x=>x) || [], max: 5})
 
   // const sourceCategories = useLabels({baseQuery: {prefix: '/cat'}})
   // const categories = useSelector({
