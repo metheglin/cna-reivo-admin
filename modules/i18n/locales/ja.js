@@ -33,7 +33,7 @@ const ja = {
   "Draft Now": "下書きにする",
   "Activate": "アクティブにする",
   "Inactivate": "非アクティブにする",
-  "Modify": "変更",
+  "Modify": "編集",
   "Add More": "追加",
   // Description
   "Sorted from larger to smaller": "数値が高い順に並んで表示されます",

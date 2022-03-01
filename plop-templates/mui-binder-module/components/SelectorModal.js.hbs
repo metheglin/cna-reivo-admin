@@ -6,7 +6,7 @@ import {
 import makeStyles from '@mui/styles/makeStyles'
 import { {{pascalCase name}}Row } from './{{pascalCase name}}Row'
 import Link from 'next/link'
-import AddIcon from '@mui/icons/Add'
+import AddIcon from '@mui/icons-material/Add'
 import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(theme=>({
@@ -75,12 +75,12 @@ const {{pascalCase namePlural}}SelectorModal = forwardRef(({selector, sources, l
 
   return (
     <Fragment>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           {label && <InputLabel shrink>{label}</InputLabel>}
         </Grid>
         <Grid item>
-          <Button size="small" onClick={()=>setOpen(true)} color="primary">Modify</Button>
+          <Button size="small" onClick={()=>setOpen(true)} color="primary">{t('Modify')}</Button>
         </Grid>
       </Grid>
       
