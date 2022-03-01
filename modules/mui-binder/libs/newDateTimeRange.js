@@ -1,18 +1,20 @@
 import React from 'react'
 import newDateTime from './newDateTime'
 import Grid from '@mui/material/Grid'
+import {useTranslation} from 'react-i18next'
 
 export default function newDateTimeRange({startAtProps, endAtProps, onChange}) {
+  const {t} = useTranslation()
   startAtProps = startAtProps || {}
   endAtProps = endAtProps || {}
   onChange = onChange || (()=>{})
   const startAt = newDateTime({
-    label: startAtProps.label || "Start at",
+    label: startAtProps.label || t("Start at"),
     onChange: ()=>onChange({startAt, endAt}),
     ...startAtProps
   })
   const endAt = newDateTime({
-    label: endAtProps.label || "End at",
+    label: endAtProps.label || t("End at"),
     onChange: ()=>onChange({startAt, endAt}),
     ...endAtProps
   })
