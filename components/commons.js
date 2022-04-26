@@ -1,12 +1,15 @@
-import {Button, Chip} from '@mui/material'
+import {Tooltip, Button, Chip} from '@mui/material'
 import GetAppIcon from '@mui/icons-material/GetApp'
 
-export function DownloadButton({children, ...props}) {
-  return (
+export function DownloadButton({children, tooltip, ...props}) {
+  const button = (
     <Button startIcon={<GetAppIcon />} size="small" 
       variant="contained" color="primary" 
       {...props}>{children}</Button>
   )
+  return tooltip ?
+    (<Tooltip title={tooltip} arrow>{button}</Tooltip>) :
+    button
 }
 
 export function ActiveStatus({status}) {

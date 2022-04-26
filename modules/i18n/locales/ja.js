@@ -26,6 +26,7 @@ const ja = {
   "Password": "パスワード",
   "Password Confirmation": "パスワード確認用",
   "Permission": "権限",
+  "Keyword": "キーワード",
   // Actions
   "New": "新規",
   "Save": "保存",
@@ -35,10 +36,18 @@ const ja = {
   "Inactivate": "非アクティブにする",
   "Modify": "編集",
   "Add More": "追加",
+  "Search": "検索",
+  "Reset": "リセット",
   // Description
   "Sorted from larger to smaller": "数値が高い順に並んで表示されます",
   "It will be opened for end-user by clicking here": "クリックするとユーザに公開可能な状態になります",
   "It will be drafted and closed for end-user by clicking here": "クリックすると下書き状態になり、非公開となります",
   "Drag and drop files here": "ドラッグドロップで追加できます",
+
+  // newDraft
+  "unstyled": "本文",
+  "header-two": "見出し H2",
+  "header-three": "見出し H3",
+  "caption": "キャプション",
 }
 export default ja

@@ -7,6 +7,7 @@ import Link from 'components/Link'
 import {FrameLayout, FrameLayoutWrapper} from 'components/layouts'
 // import {useRouter} from 'next/router'
 import {useSession} from 'modules/rvadmin/core/SessionProvider'
+import {useTranslation} from 'react-i18next'
 import newRowsPager from 'modules/mui-binder/newRowsPager'
 import PublishStatus from 'components/PublishStatus'
 import PublishButton from 'components/PublishButton'
@@ -24,6 +25,7 @@ const getBreadcrumb = () => ([
 
 const Page = () => {
   // const router = useRouter()
+  const {t} = useTranslation()
   const session = useSession()
 
   const [searchQuery, setSearchQuery] = useState({})
@@ -68,8 +70,8 @@ const Page = () => {
             <SearchPaper 
               onSearch={()=>setSearchQuery({keyword: keyword})}
               onReset={()=>resetSearchQuery()}>
-              <TextField fullWidth label="Keyword"
-                placeholder="Search with keyword"
+              <TextField fullWidth label={t("Keyword")}
+                placeholder={t("Search with keyword")}
                 value={keyword} 
                 onChange={(e)=>setKeyword(e.target.value)} />
             </SearchPaper>

@@ -8,6 +8,7 @@ import LinkIcon from '@mui/icons-material/Link'
 import ImageIcon from '@mui/icons-material/Image'
 
 import {useAssets, useImageUploader, AssetsButtonModal} from 'modules/mui-binder/libs/asset'
+import {useTranslation} from 'react-i18next'
 
 export default function Controls({channel, editorState, setEditorState}) {
   return (
@@ -23,6 +24,7 @@ export default function Controls({channel, editorState, setEditorState}) {
 }
 
 export function ControlSelectFormat({editorState, setEditorState}) {
+  const {t} = useTranslation()
   const block = getSelectedBlock(editorState)
   const blockType = block.getType() || 'unstyled'
   const [format, setFormat] = useState(blockType)
@@ -42,10 +44,10 @@ export function ControlSelectFormat({editorState, setEditorState}) {
         onChange={handleChange}
         variant="standard"
       >
-        <MenuItem value={'unstyled'}>unstyled</MenuItem>
-        <MenuItem value={'header-two'}>header-two</MenuItem>
-        <MenuItem value={'header-three'}>header-three</MenuItem>
-        <MenuItem value={'caption'}>caption</MenuItem>
+        <MenuItem value={'unstyled'}>{t('unstyled')}</MenuItem>
+        <MenuItem value={'header-two'}>{t('header-two')}</MenuItem>
+        <MenuItem value={'header-three'}>{t('header-three')}</MenuItem>
+        <MenuItem value={'caption'}>{t('caption')}</MenuItem>
       </Select>
     </FormControl>
   )
