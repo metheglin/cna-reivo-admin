@@ -1,0 +1,37 @@
+import {useState, useEffect} from 'react'
+import {Grid, InputAdornment} from '@mui/material'
+import newSearchBar from '../newSearchBar'
+import useDeepCompareEffect from 'use-deep-compare-effect'
+import {useSession} from 'modules/rvadmin/core/SessionProvider'
+
+export default function useDocuments({baseQuery}) {
+  const {api} = useSession()
+  const [loading, setLoading] = useState(false)
+  const [items, setItems] = useState([])
+  const addItem = (item) => setItems(x => [item, ...x])
+
+  const searchBar = newSearchBar({
+    disabled: false,
+    placeholder: "Search with keyword",
+  })
+  const renderSearch = (
+    <Grid container spacing={1}>
+      <Grid item xs={12}>{searchBar.render}</Grid>
+    </Grid>
+  )
+
+  const params = {...(baseQuery || {}), keyword: searchBar.value}
+
+  useDeepCompareEffect(()=>{
+    setLoading(true)
+    api.fetch(`/documents`, {params}).then(res=>{
+      setItems(res.data)
+      setLoading(false)
+    }).catch(error=>setLoading(false))
+  }, [params])
+
+  return {
+    loading, items, setItems, addItem,
+    renderSearch,
+  }
+}
