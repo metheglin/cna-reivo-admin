@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react'
-import useDeepCompareEffect from 'use-deep-compare-effect'
+import {useDeepCompareEffectNoCheck} from 'use-deep-compare-effect'
 import {
   Button, Chip, TableCell, TableContainer, Paper, Grid,
 } from '@mui/material';
@@ -10,14 +10,8 @@ import {useSession} from 'modules/rvadmin/core/SessionProvider'
 import {useTranslation} from 'react-i18next'
 import newRowsPager from 'modules/mui-binder/newRowsPager'
 import PublishStatus from 'components/PublishStatus'
-import PublishButton from 'components/PublishButton'
-import {MainDashBar} from 'components{{pathPrefix}}'
-import {formatDistance} from 'date-fns'
+import {MainDashBar, use{{pascalCase name}}SearchForm } from 'components{{pathPrefix}}'
 import {CreatedAt} from 'components/Timestamps'
-
-// NOTE: Comment-in to enable search
-// import {TextField} from '@material-ui/core'
-// import {SearchPaper} from 'components/SearchPaper'
 
 const getBreadcrumb = () => ([
   {title: "{{titleCase name}}",}
@@ -27,14 +21,8 @@ const Page = () => {
   // const router = useRouter()
   const {t} = useTranslation()
   const session = useSession()
-
-  const [searchQuery, setSearchQuery] = useState({})
-  // NOTE: Comment-in to enable search
-  // const [keyword, setKeyword] = useState()
-  // const resetSearchQuery = () => {
-  //   setKeyword("")
-  //   setSearchQuery({})
-  // }
+  const searchForm = use{{pascalCase name}}SearchForm()
+  const {searchQuery} = searchForm
 
   const pager = newRowsPager({
     tableProps: {size: 'medium'},
@@ -58,24 +46,17 @@ const Page = () => {
     )
   })
 
-  useDeepCompareEffect(()=>{
-    pager.turnPage(searchQuery)
+  useDeepCompareEffectNoCheck(()=>{
+    if (searchQuery) {
+      pager.turnPage(searchQuery)
+    }
   }, [searchQuery])
 
   return (
     <FrameLayout dashBar={<MainDashBar breadcrumb={getBreadcrumb()} />}>
       <FrameLayoutWrapper>
         <Grid container spacing={2}>
-          {/*<Grid item xs={12}>
-            <SearchPaper 
-              onSearch={()=>setSearchQuery({keyword: keyword})}
-              onReset={()=>resetSearchQuery()}>
-              <TextField fullWidth label={t("Keyword")}
-                placeholder={t("Search with keyword")}
-                value={keyword} 
-                onChange={(e)=>setKeyword(e.target.value)} />
-            </SearchPaper>
-          </Grid>*/}
+          {searchForm.render && <Grid item xs={12}>{searchForm.render}</Grid>}
           <Grid item xs={12}>
             <Paper><TableContainer>{pager.render}</TableContainer></Paper>
           </Grid>

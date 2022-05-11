@@ -1,0 +1,66 @@
+import {useState, useEffect,} from 'react'
+import {Grid,} from '@mui/material'
+import {useTranslation} from 'react-i18next'
+
+import {SearchPaper} from 'components/SearchPaper'
+import newTextField from 'modules/mui-binder/libs/newTextField'
+import newSelectableCheckbox from 'modules/mui-binder/libs/newSelectableCheckbox'
+
+const allStatus = ["opend", "draft",]
+
+import JSONStorage from 'modules/rvadmin/utils/JSONStorage'
+const searchStorage = new JSONStorage('search.{{name}}')
+
+export function use{{pascalCase name}}SearchForm() {
+  const {t} = useTranslation()
+  const [searchQuery, setSearchQuery] = useState(null)
+  // const keyword = newTextField({label: t('Keyword'), fullWidth: true,})
+  // const status = newSelectableCheckbox({
+  //   defaultValue: allStatus, label: t('Status'), 
+  //   options: allStatus.reduce((acc,x)=>{acc[x] = x; return acc}, {})
+  // })
+  const buildSearchData = () => {
+    // return {keyword: keyword.value, status: status.values}
+    return {}
+  }
+  const buildSearchQuery = (searchData) => {
+    // return {keyword: searchData.keyword, statuses: searchData.status}
+    return {}
+  }
+  const applySearchQuery = (searchData) => {
+    // keyword.setValue(searchData.keyword || "")
+    // status.setValues(searchData.status || allStatus)
+    setSearchQuery(buildSearchQuery(searchData))
+  }
+  const resetSearchQuery = () => {
+    applySearchQuery({})
+    searchStorage.remove()
+  }
+  const handleSearch = () => {
+    const searchData = buildSearchData()
+    setSearchQuery(buildSearchQuery(searchData))
+    searchStorage.set(searchData)
+  }
+
+  useEffect(()=>{
+    const searchData = searchStorage.get()
+    applySearchQuery(searchData || {})
+  }, [])
+
+  // const render = (
+  //   <SearchPaper 
+  //     onSearch={()=>{handleSearch()}}
+  //     onReset={()=>resetSearchQuery()}>
+  //     <Grid container spacing={2}>
+  //       <Grid item xs={4}>{keyword.render}</Grid>
+  //       <Grid item xs={8}>{status.render}</Grid>
+  //     </Grid>
+  //   </SearchPaper>
+  // )
+  const render = null
+
+  return {
+    searchQuery, setSearchQuery,
+    render,
+  }
+}

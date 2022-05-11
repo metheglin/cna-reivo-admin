@@ -41,7 +41,7 @@ module.exports = plop => {
       const data  = {name, pathPrefix, apiPrefix}
       console.log(data)
 
-      const presetComponents = ['index', 'Form', 'MainDashBar', 'SubDashBar']
+      const presetComponents = ['index', 'Form', 'MainDashBar', 'SubDashBar', 'SearchForm']
       const actionsPresetComponents = presetComponents.map(filename=>({
         type: 'add',
         path: `components${pathPrefix}/${filename}.js`,
