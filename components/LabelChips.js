@@ -1,4 +1,4 @@
-import {Chip, Grid} from '@material-ui/core'
+import {Chip, Grid} from '@mui/material'
 
 export default function LabelChips({labels, colors={'/': 'primary'}}) {
   const labelsSorted = labels.sort((a,b) => a.path < b.path)
