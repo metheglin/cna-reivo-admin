@@ -15,5 +15,5 @@ export default function newTextField({defaultValue, onChange, label, helperText,
       label={t(label)} helperText={t(helperText)}
       value={value} onChange={e=>setValue(e.target.value)} />
   )
-  return {value, render, reset}
+  return {value, setValue, render, reset}
 }
