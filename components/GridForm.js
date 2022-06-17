@@ -41,7 +41,7 @@ function GridFormDouble({children, forms, subforms, saving, setSaving, onSave, h
         <Grid item container sm={12} md={7} spacing={2}>
           {renderRecursive(forms)}
         </Grid>
-        {subforms && subforms.length>0 && <Grid item container sm={12} md={5} spacing={0}>
+        {subforms && subforms.length>0 && <Grid item container sm={12} md={5} spacing={2}>
           {renderRecursive(subforms)}
         </Grid>}
       </Grid>

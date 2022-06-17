@@ -1,4 +1,4 @@
-import React from 'react'
+import {Fragment, isValidElement} from 'react'
 import { Typography, Toolbar, Tooltip, IconButton, Icon, Divider } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from 'next/router'
@@ -44,16 +44,20 @@ export default function DashBar({children, main}) {
 
 export function MainDashBar({children, title, breadcrumb, iconLinks}) {
   const main = (
-    <React.Fragment>
+    <Fragment>
       {title && <Typography variant="h4">{title}</Typography>}
       {breadcrumb && <Breadcrumb list={breadcrumb} />}
-    </React.Fragment>
+    </Fragment>
   )
   const sub = (
-    <React.Fragment>
-      {iconLinks.map((x,i)=><React.Fragment key={i}>{renderIconLink(x)}</React.Fragment>)}
+    <Fragment>
+      {iconLinks.filter(x=>x).map((x,i)=>{
+        return isValidElement(x) ?
+          x :
+          <Fragment key={i}>{renderIconLink(x)}</Fragment>
+      })}
       {children}
-    </React.Fragment>
+    </Fragment>
   )
   return (<DashBar main={main}>{sub}</DashBar>)
 }
