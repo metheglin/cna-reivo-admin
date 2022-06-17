@@ -40,7 +40,7 @@ export default function newDateTime({defaultValue, label, helperText}) {
 
   return { 
     render,
-    value: date, 
+    value: date, setValue: setDate,
     format: (fm)=>(isValid(date) ? format(date, fm) : null),
     reset,
   }
