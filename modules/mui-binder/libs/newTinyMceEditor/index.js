@@ -29,7 +29,7 @@ export default function newTinyMceEditor({defaultValue, toolbar, ...props}) {
       {label && <InputLabel shrink>{t(label)}</InputLabel>}
       <Editor {...props}
         apiKey="q0at5wch0ut06ov3rnokh8jffwakzuld6mh392wkbyf7d6qg"
-        value={defaultValue}
+        initialValue={defaultValue}
         init={{...skin, ...defaultInitProps, ...init, toolbar}}
         onEditorChange={(x)=>setValue(x)} />
     </Fragment>
